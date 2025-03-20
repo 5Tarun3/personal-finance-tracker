@@ -1,0 +1,120 @@
+/* Modern Particle System */
+.particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+  }
+  
+  .particle-1 {
+    background: linear-gradient(135deg, #4CD964, #39B54A);
+    box-shadow: 0 0 20px 5px rgba(76, 217, 100, 0.3);
+    animation: particle1Move 25s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  
+  .particle-2 {
+    background: linear-gradient(135deg, #5E5CE6, #4A47D5);
+    box-shadow: 0 0 25px 6px rgba(94, 92, 230, 0.3);
+    animation: particle2Move 30s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  
+  .particle-3 {
+    background: linear-gradient(135deg, #FF9500, #FF6700);
+    box-shadow: 0 0 20px 4px rgba(255, 149, 0, 0.25);
+    animation: particle3Move 28s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  
+  .particle-4 {
+    background: linear-gradient(135deg, #00C8FF, #0080FF);
+    box-shadow: 0 0 22px 5px rgba(0, 200, 255, 0.25);
+    animation: particle4Move 32s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  
+  .particle-5 {
+    background: linear-gradient(135deg, #FF2D55, #FF0066);
+    box-shadow: 0 0 18px 4px rgba(255, 45, 85, 0.2);
+    animation: particle5Move 26s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  
+  @keyframes particle1Move {
+    0%, 100% { transform: translate(10%, 20%) scale(1); opacity: 0.7; }
+    25% { transform: translate(15%, 30%) scale(1.1); opacity: 0.9; }
+    50% { transform: translate(25%, 15%) scale(0.9); opacity: 0.6; }
+    75% { transform: translate(20%, 25%) scale(1.05); opacity: 0.8; }
+  }
+  
+  @keyframes particle2Move {
+    0%, 100% { transform: translate(80%, 15%) scale(1); opacity: 0.6; }
+    30% { transform: translate(70%, 25%) scale(1.15); opacity: 0.8; }
+    60% { transform: translate(75%, 10%) scale(0.95); opacity: 0.7; }
+  }
+  
+  @keyframes particle3Move {
+    0%, 100% { transform: translate(30%, 80%) scale(1); opacity: 0.5; }
+    33% { transform: translate(25%, 70%) scale(1.1); opacity: 0.7; }
+    66% { transform: translate(35%, 75%) scale(0.9); opacity: 0.6; }
+  }
+  
+  @keyframes particle4Move {
+    0%, 100% { transform: translate(85%, 75%) scale(1); opacity: 0.6; }
+    25% { transform: translate(80%, 85%) scale(1.05); opacity: 0.7; }
+    50% { transform: translate(90%, 80%) scale(0.95); opacity: 0.5; }
+    75% { transform: translate(85%, 70%) scale(1.1); opacity: 0.8; }
+  }
+  
+  @keyframes particle5Move {
+    0%, 100% { transform: translate(60%, 40%) scale(1); opacity: 0.7; }
+    20% { transform: translate(55%, 35%) scale(1.1); opacity: 0.9; }
+    40% { transform: translate(65%, 45%) scale(0.9); opacity: 0.6; }
+    60% { transform: translate(50%, 40%) scale(1.05); opacity: 0.8; }
+    80% { transform: translate(60%, 35%) scale(0.95); opacity: 0.7; }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .particles-container {
+      opacity: 0.4; /* Reduce opacity on mobile for better text readability */
+    }
+    
+    .particle {
+      transform-origin: center;
+      animation-duration: 20s; /* Slightly faster on mobile */
+    }
+  }
+  
+  /* Background subtle gradient overlay */
+  .bg-gradient-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(18, 18, 24, 0) 0%, rgba(18, 18, 24, 0.6) 100%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  /* Optional: Subtle noise texture for depth */
+  .noise-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: -1;
+  }

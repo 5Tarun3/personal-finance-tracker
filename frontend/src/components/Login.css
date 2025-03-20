@@ -1,0 +1,115 @@
+/* Modern Dark UI for Login Page */
+body {
+  background: #121212;
+  color: #e6b800;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Login Container */
+.login-container {
+  background: rgba(34, 34, 34, 0.95);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0px 10px 30px rgba(230, 184, 0, 0.3);
+  text-align: center;
+  width: 350px;
+  animation: fadeIn 0.5s ease-in-out;
+  margin: 20px; /* Added margin for spacing */
+
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Heading */
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-shadow: 0 0 15px rgba(230, 184, 0, 0.7);
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: #2d2d2d;
+  color: #e6b800;
+  font-size: 1rem;
+  transition: 0.3s;
+  outline: none;
+  margin-bottom: 15px; /* Added margin for spacing */
+
+}
+
+input:focus {
+  border-color: #e6b800;
+  box-shadow: 0 0 10px rgba(230, 184, 0, 0.6);
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+/* Login Button */
+.input-btn{
+  width: 323px;
+}
+
+.login-btn {
+  background: linear-gradient(90deg, #e6b800, #b8860b);
+  color: #1e1e1e;
+  width: 350px;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(230, 184, 0, 0.7);
+}
+
+/* Google Sign-in Button */
+.google-btn {
+  background: #ffffff;
+  color: #1e1e1e;
+}
+
+.google-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+/* Register Button */
+.register-btn {
+  background: transparent;
+  border: 2px solid #e6b800;
+  color: #e6b800;
+}
+
+.register-btn:hover {
+  background: #e6b800;
+  color: #1e1e1e;
+  box-shadow: 0 0 15px rgba(230, 184, 0, 0.8);
+}

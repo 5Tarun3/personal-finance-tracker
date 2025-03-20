@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        {/*<Navbar />*/}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -28,7 +28,7 @@ function App() {
             <Route path="/IncomeManager" element={<IncomeManager/>} /> {/* Added route for IncomeManager */}
           </Routes>
         </main>
-        <Footer />
+        {/*<Footer />*/}
       </div>
     </Router>
   );

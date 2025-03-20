@@ -1,0 +1,230 @@
+/* SignUpPage.css */
+
+.signup-page {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #121218 0%, #1e1e2a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .background-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .content-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 90%;
+    max-width: 1400px;
+    min-height: 80vh;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    perspective: 1000px;
+  }
+  
+  .left-section {
+    flex: 1;
+    padding-right: 2rem;
+    transform-style: preserve-3d;
+    animation: floatSection 6s ease-in-out infinite;
+  }
+  
+  @keyframes floatSection {
+    0%, 100% {
+      transform: translateZ(0) translateY(0);
+    }
+    50% {
+      transform: translateZ(20px) translateY(-10px);
+    }
+  }
+  
+  .brand-container {
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .brand-name {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #4CD964, #5AC8FA);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -1px;
+  }
+  
+  .brand-tagline {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  
+  .features-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    perspective: 1000px;
+  }
+  
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 1s ease-out;
+    animation-fill-mode: both;
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-card:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  
+  .feature-card:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  
+  .feature-card:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  
+  .feature-card:nth-child(4) {
+    animation-delay: 0.8s;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 15px 30px rgba(76, 217, 100, 0.2);
+    border-color: rgba(76, 217, 100, 0.3);
+  }
+  
+  .feature-icon {
+    font-size: 2rem;
+    color: #4CD964;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  
+  .feature-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInRight 1s ease-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* 3D rotating orb design for desktop only */
+  @media (min-width: 992px) {
+    .right-section::before {
+      content: '';
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76, 217, 100, 0.1) 0%, transparent 70%);
+      box-shadow: 0 0 80px rgba(76, 217, 100, 0.3);
+      animation: rotateSphere 20s linear infinite;
+      z-index: -1;
+    }
+  
+    @keyframes rotateSphere {
+      0% {
+        transform: rotate(0deg) translateZ(-100px);
+      }
+      100% {
+        transform: rotate(360deg) translateZ(-100px);
+      }
+    }
+  }
+  
+  /* Responsive design */
+  @media (max-width: 992px) {
+    .content-container {
+      flex-direction: column;
+      padding: 1rem;
+    }
+    
+    .left-section {
+      padding-right: 0;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .brand-container {
+      margin-bottom: 1.5rem;
+    }
+    
+    .brand-name {
+      font-size: 3rem;
+    }
+    
+    .brand-tagline {
+      font-size: 1.2rem;
+    }
+    
+    .features-container {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+  
+  /* For very small screens */
+  @media (max-width: 480px) {
+    .brand-name {
+      font-size: 2.5rem;
+    }
+    
+    .auth-container {
+      width: 100%;
+      padding: 1.5rem;
+    }
+  }

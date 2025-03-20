@@ -5,6 +5,9 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom'; 
 import axios from 'axios';
 import AnimatedButton from '../components/AnimatedButton';
+import FinancePieChart from '../components/FinancePieChart';
+
+
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
@@ -39,19 +42,21 @@ const Dashboard = () => {
       });
     } catch (error) {
       console.error("Error fetching finance overview:", error);
+      alert("Failed to fetch finance overview. Please check your connection and try again.");
       setFinanceOverview(null);
     }
   };
 
   useEffect(() => {
-    setLoading(true);
-    fetchFinanceOverview();
-    const timer = setTimeout(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      await fetchFinanceOverview();
       setLoading(false);
-    }, 220);
-    return () => clearTimeout(timer);
-  }, []);
+      console.log("Finance overview fetched successfully:", financeOverview);
+    };
 
+    fetchData();
+  }, []);
 
   const loadingVariants = {
     hidden: { opacity: 0 },
@@ -74,20 +79,19 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col md:flex-row p-6 min-h-screen ">
       <Sidebar />
-    <div className="md:w-3/4 rounded-lg shadow-lg p-4 mt-4 md:mt-0 md:ml-4 bg-gradient-to-br from-slate-800 to-slate-900">
-
+      <div className="md:w-3/4 rounded-lg shadow-lg p-4 mt-4 md:mt-0 md:ml-4 bg-gradient-to-br from-slate-800 to-slate-900">
         <h2 className="text-lg text-gold-300 font-bold">Statistics</h2>
-
         {financeOverview && (
           <div>
             <h2 className="text-gold-300 text-lg font-bold mt-4">Monthly Overview</h2>
             <h3 className="text-gold-300">Current Month Expenses: ₹{financeOverview.totalExpenses}</h3>
             <h3 className="text-gold-300">Current Month Income: ₹{financeOverview.totalIncomes}</h3>
             <h3 className="text-gold-300">Net: {financeOverview.net > 0 ? `₹${financeOverview.net} Gain` : `₹${Math.abs(financeOverview.net)} Loss`}</h3>
-
             <ChartVisualization data={data} />
           </div>
         )}
+        <FinancePieChart type="expense" />
+        <FinancePieChart type="income" />
       </div>
     </div>
   );

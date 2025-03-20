@@ -1,0 +1,71 @@
+/* Register Page Styling */
+.auth-container {
+    background: rgba(34, 34, 34, 0.95);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0px 10px 30px rgba(230, 184, 0, 0.3);
+    text-align: center;
+    width: 350px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Title Styling */
+  .auth-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(230, 184, 0, 0.6);
+  }
+  
+  /* Input Fields */
+  .auth-container input {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.6rem 0;
+    border-radius: 5px;
+    background: #2d2d2d;
+    color: #e6b800;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+  }
+  
+  /* Focus Effect on Inputs */
+  .auth-container input:focus {
+  }
+  
+  /* Register Button */
+  .auth-container button {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    border: none;
+    background: #e6b800;
+    color: #121212;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Hover Effect */
+  .auth-container button:hover {
+    background: #cf9d00;
+    box-shadow: 0 0 10px rgba(230, 184, 0, 0.6);
+  }
+
+  .input-btn{
+    width: 323px !important;
+  }
+
+  .login-btn {
+    background: linear-gradient(90deg, #e6b800, #b8860b);
+    color: #1e1e1e;
+    width: 350px;
+  }
+  
+  /* Active Click Effect */
+  .auth-container button:active {
+    transform: scale(0.95);
+  }
+  
