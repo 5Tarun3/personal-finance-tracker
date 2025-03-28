@@ -121,7 +121,21 @@ router.post("/tokenIsValid", protect, async (req, res) => {
   }
 });
 
+router.get("/profile", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user).select('name email');
+    res.json({
+      name: user.name,
+      email: user.email,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ err: error.message });
+  }
+});
+
 // This route is grabbing one user
+
 router.get("/", protect, async (req,res) => {
   const user = await User.findById(req.user)
   res.json({

@@ -10,7 +10,8 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import ExpenseManager from './pages/ExpenseManager';
 import IncomeManager from './pages/IncomeManager'; // Import IncomeManager
-
+import ProfilePage
+ from './pages/ProfilePage';
 function App() {
   return (
     <Router>
@@ -25,7 +26,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/ExpenseManager" element={<ExpenseManager/>} />
-            <Route path="/IncomeManager" element={<IncomeManager/>} /> {/* Added route for IncomeManager */}
+            <Route path="/IncomeManager" element={<IncomeManager/>} /> 
+            <Route path="/Profile" element={<ProfilePage />}/>
           </Routes>
         </main>
         {/*<Footer />*/}

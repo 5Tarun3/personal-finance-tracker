@@ -26,6 +26,10 @@ const Profile = () => {
         signOut(auth).then(() => { // Sign out using Firebase
             localStorage.removeItem('token');
             navigate("/login");
+            window.location.reload(); // Refresh the page after logout
+
+            window.location.reload(); // Refresh the page after logout
+
             // Dispatch a custom event to notify NavBar of logout
             window.dispatchEvent(new Event('logout'));
         }).catch((error) => {

@@ -3,8 +3,10 @@ import AddExpense from '../components/AddExpense';
 import DisplayExpenses from '../components/DisplayExpenses';
 import UpdateExpense from '../components/UpdateExpense';
 import { motion } from 'framer-motion';
-import { FaSearch, FaTimes } from 'react-icons/fa';
+import { FaSearch, FaTimes , FaDownload} from 'react-icons/fa';
 import axios from 'axios';
+import ExcelJS from 'exceljs';
+import { saveAs } from 'file-saver';
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.9 },
@@ -193,6 +195,27 @@ const ExpenseManager = () => {
     applyFilters();
   }, [categoryFilter, amountFilter, dateFilter, expenses]);
 
+  const downloadExcel = async () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Expenses");
+  
+    // Define headers
+    worksheet.columns = [
+      { header: "Category", key: "category", width: 20 },
+      { header: "Amount", key: "amount", width: 15 },
+      { header: "Date", key: "date", width: 20 },
+    ];
+  
+    // Add data
+    filteredExpenses.forEach(expense => worksheet.addRow(expense));
+  
+    // Create the file
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+  
+    // Trigger download
+    saveAs(blob, "ExpenseData.xlsx");
+  };
   return (
     <div className="flex justify-center w-full">
       <motion.div
@@ -211,6 +234,13 @@ const ExpenseManager = () => {
           >
             <AddExpense refetchExpenses={refetchExpenses} setRefetchExpenses={setRefetchExpenses} />
           </motion.div>
+          <motion.button
+            onClick={downloadExcel}
+            className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded flex items-center gap-2 mb-4"
+            whileHover={{ scale: 1.05 }}
+          >
+            <FaDownload /> Download Expense Data
+          </motion.button>
 
           {/* Filter Section */}
           <motion.div 

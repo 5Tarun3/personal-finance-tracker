@@ -12,7 +12,9 @@
   "dependencies": {
     "axios": "^1.8.4",
     "chart.js": "^4.4.4",
+    "exceljs": "^4.4.0",
     "express-validator": "^7.2.0",
+    "file-saver": "^2.0.5",
     "firebase": "^11.4.0",
     "framer-motion": "^11.11.1",
     "lucide-react": "^0.483.0",
@@ -23,7 +25,11 @@
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.13.1",
     "react-router-dom": "^6.26.2",
-    "styled-components": "^6.1.13"
+    "recharts": "^2.15.1",
+    "sheetjs": "^2.0.0",
+    "sheetjs-style": "^0.15.8",
+    "styled-components": "^6.1.13",
+    "three": "^0.174.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
