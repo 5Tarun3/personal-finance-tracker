@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../assets/firebaseconfig";
 import { useNavigate } from "react-router-dom";
 import { FaUserPlus, FaGoogle } from "react-icons/fa";
+import axios from "axios"; // Import axios for making API requests
 import "../styles/Auth.css"; // We'll create a new CSS file for all auth components
 
 const SignUpForm = () => {
@@ -23,7 +24,40 @@ const SignUpForm = () => {
     }
     
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const { user } = userCredential;
+
+      // Register user in the backend
+      await axios.post("http://localhost:5000/api/users/register", { 
+        name: user.displayName, 
+        email: user.email, 
+        password: password,
+        passwordCheck: password,
+        googleLogin: false // Use the provided password for normal sign-up
+      });
+
+      navigate("/login");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const { displayName, email } = user;
+
+      // Register user in the backend
+      await axios.post("http://localhost:5000/api/users/register", { 
+        name: displayName, 
+        email: email, 
+        password: "e23Dk2kd2&i4o5$",
+        passwordCheck: "e23Dk2kd2&i4o5$",
+        googleLogin: true // Set a default password for Google sign-up
+      });
+
       navigate("/login");
     } catch (error) {
       setError(error.message);
@@ -77,7 +111,7 @@ const SignUpForm = () => {
         <span>or</span>
       </div>
       
-      <button className="google-button">
+      <button className="google-button" onClick={handleGoogleSignIn}>
         <FaGoogle className="button-icon" /> Continue with Google
       </button>
       

@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.7.7",
+    "axios": "^1.8.4",
     "chart.js": "^4.4.4",
     "express-validator": "^7.2.0",
     "firebase": "^11.4.0",

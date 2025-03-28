@@ -10,65 +10,85 @@ const { body, validationResult } = require('express-validator');
 const emailRegex = "/^[\\w-\\.]+@[\\w-\\.]+(\\.\\w{2,3})+$/"; // Basic email validation regex
 
 // Register a new user
+// Register a new user
 router.post('/register', [
-    body('email').isEmail().withMessage('Please enter a valid email'),
-    body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long'),
-    body('passwordCheck').custom((value, { req }) => value === req.body.password).withMessage('Passwords do not match'),
+  body('email').isEmail().withMessage('Please enter a valid email'),
+  body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long'),
+  body('passwordCheck').optional().custom((value, { req }) => value === req.body.password).withMessage('Passwords do not match'),
 ],
- async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  try {
-    const { name, email, password, passwordCheck } = req.body;
-    if (!name || !email || !password || !passwordCheck) {
-      return res.status(400).json({ msg: "Not all fields have been entered" });
-    }
-    if (password !== passwordCheck) {
-      return res.status(400).json({ msg: "Passwords do not match. Please try again" });
-    }
-    if (password.length < 5) {
-      return res.status(400).json({ msg: "The password needs to be at least 5 characters long" });
-    }
-    // Check if email already exists
-    const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: 'User already exists' });
+async (req, res) => {
+const errors = validationResult(req);
+if (!errors.isEmpty()) {
+  return res.status(400).json({ errors: errors.array() });
+}
+try {
+  const { name, email, password, passwordCheck, googleLogin } = req.body;
+  console.log(req.body); // Debugging log to check incoming request body
 
-    const newUser = new User({ name, email, password });
-    const savedUser = await newUser.save();
-
-    if (savedUser) {
-      res.status(201).json({ message: 'User registered successfully' });
-    } else {
-      res.status(400).json({ message: 'Invalid user data' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ err: error.message });
+  if (!name || !email || (req.body.password && !passwordCheck)) {
+    return res.status(400).json({ msg: "Not all fields have been entered" });
   }
+  if (password !== passwordCheck) {
+    return res.status(400).json({ msg: "Passwords do not match. Please try again" });
+  }
+  if (req.body.password && password.length < 5) {
+    return res.status(400).json({ msg: "The password needs to be at least 5 characters long" });
+  }
+
+  // Check if email already exists
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    const token = jwt.sign({ id: userExists._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    return res.json({ token });
+  }
+
+  const newUser = new User({ name, email, password: googleLogin ? password : password });
+  const savedUser = await newUser.save();
+
+  if (savedUser) {
+    res.status(201).json({ message: 'User registered successfully' });
+  } else {
+    res.status(400).json({ message: 'Invalid user data' });
+  }
+} catch (error) {
+  console.error(error);
+  res.status(500).json({ err: error.message });
+}
 });
 
 // Login a user
 router.post('/login', async (req, res) => {
-  try{
-  const { email, password } = req.body;
+try {
+  const { email, password, googleLogin } = req.body;
   const user = await User.findOne({ email });
-  if (!email || !password) {
+  
+    if (!email || (!password && !googleLogin) || !req.body.name) {
+
     return res.status(400).json({ msg: "Not all fields have been entered" });
   }
-  if (user && (await user.matchPassword(password))) {
+
+  if (!user) {
+    // Create a new user if they don't exist and it's a Google login
+    if (googleLogin) {
+      const newUser = new User({ name: req.body.name, email, password });
+
+      await newUser.save(); // Save the new user to the database
+    }
+    return res.status(401).json({ message: 'User not found' });
+  }
+
+  if (user && await user.matchPassword(password)) {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    console.log("Generated Token:", token); // Debugging log for generated token
     res.json({ token });
   } else {
     res.status(401).json({ message: 'Invalid email or password' });
   }
-  }catch(error){
-    console.error(error);
-    res.status(500).json({ err: error.message });
-  }
+} catch (error) {
+  console.error(error);
+  res.status(500).json({ err: error.message });
+}
 });
-// delete user account route
 router.delete("/delete", protect, async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.user);

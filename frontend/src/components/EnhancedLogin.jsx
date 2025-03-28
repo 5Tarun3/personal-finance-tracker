@@ -4,6 +4,7 @@ import { auth } from "../assets/firebaseconfig";
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { FaGoogle, FaSignInAlt, FaLock } from "react-icons/fa";
 import "../styles/Auth.css";
+import axios from "axios";
 
 const EnhancedLogin = () => {
   const [email, setEmail] = useState("");
@@ -22,7 +23,8 @@ const EnhancedLogin = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
       localStorage.setItem("token", token);
-      navigate("/");
+      console.log("Token set in local storage:", token); // Debugging log for token
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message.replace("Firebase: ", ""));
     } finally {
@@ -36,9 +38,21 @@ const EnhancedLogin = () => {
     
     try {
       const result = await signInWithPopup(auth, provider);
-      const token = await result.user.getIdToken();
-      localStorage.setItem("token", token);
-      navigate("/");
+      const { displayName, email } = result.user;
+      
+      // Send user data to backend
+      const response = await axios.post("http://localhost:5000/api/users/login", {
+        email,
+        password: "e23Dk2kd2&i4o5$",
+        googleLogin: true,
+        name: displayName,
+
+      });
+
+      const token = response.data.token; // Use the token from the backend
+      localStorage.setItem("token", token);      
+
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message.replace("Firebase: ", ""));
     } finally {
