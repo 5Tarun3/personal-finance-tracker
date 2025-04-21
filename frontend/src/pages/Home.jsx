@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaChartLine, FaRobot, FaRegLightbulb, FaRegChartBar, FaPlus, FaArrowDown, FaArrowUp,FaArrowRight } from 'react-icons/fa';
 import '../styles/HomePage.css';
 import ParticleBackground from '../components/ParticleBackground';
+import Spline from '@splinetool/react-spline';
+
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -69,7 +71,7 @@ const HomePage = () => {
                 </div>
                 <div className="preview-balance">
                   <span className="balance-label">Current Balance</span>
-                  <span className="balance-amount">$8,547.63</span>
+                  <span className="balance-amount">₹8,547.63</span>
                 </div>
               </div>
               <div className="preview-charts">
@@ -83,7 +85,7 @@ const HomePage = () => {
                     </div>
                     <div className="stat-details">
                       <span className="stat-title">Income</span>
-                      <span className="stat-value">$5,230</span>
+                      <span className="stat-value">₹5,230</span>
                       <span className="stat-change positive">+12% <FaArrowUp /></span>
                     </div>
                   </div>
@@ -93,7 +95,7 @@ const HomePage = () => {
                     </div>
                     <div className="stat-details">
                       <span className="stat-title">Expenses</span>
-                      <span className="stat-value">$3,180</span>
+                      <span className="stat-value">₹3,180</span>
                       <span className="stat-change negative">-8% <FaArrowDown /></span>
                     </div>
                   </div>
@@ -103,7 +105,7 @@ const HomePage = () => {
                     </div>
                     <div className="stat-details">
                       <span className="stat-title">Savings</span>
-                      <span className="stat-value">$2,050</span>
+                      <span className="stat-value">₹2,050</span>
                       <span className="stat-change positive">+24% <FaArrowUp /></span>
                     </div>
                   </div>
@@ -113,7 +115,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      
+      <Spline scene="https://prod.spline.design/jNmNZD3Z-2S94Z87/scene.splinecode" />
       {/* Features Section */}
       <section id="features" className="features-section">
         <div className="section-header">
@@ -127,7 +129,7 @@ const HomePage = () => {
               key={index} 
               className="feature-card"
               style={{ 
-                animationDelay: `${feature.delay}s`,
+                animationDelay: `₹{feature.delay}s`,
                 borderColor: feature.color + '40' // Adding transparency for border color
               }}
             >
@@ -162,13 +164,13 @@ const HomePage = () => {
                   <FaRobot />
                 </div>
                 <div className="message-content">
-                  <p>You've spent $342 on restaurants this month, which is 18% less than your monthly average. Great job staying under budget!</p>
+                  <p>You've spent ₹342 on restaurants this month, which is 18% less than your monthly average. Great job staying under budget!</p>
                   <div className="mini-chart">
                     <div className="mini-bar this-month"></div>
                     <div className="mini-bar average"></div>
                     <div className="mini-labels">
                       <span>This Month</span>
-                      <span>Avg ($418)</span>
+                      <span>Avg (₹418)</span>
                     </div>
                   </div>
                 </div>
@@ -225,7 +227,7 @@ const HomePage = () => {
                       <span className="transaction-name">Whole Foods Market</span>
                       <span className="transaction-category">Groceries</span>
                     </div>
-                    <span className="transaction-amount expense">-$94.28</span>
+                    <span className="transaction-amount expense">-₹94.28</span>
                   </div>
                   <div className="transaction-item">
                     <div className="transaction-icon salary"></div>
@@ -233,7 +235,7 @@ const HomePage = () => {
                       <span className="transaction-name">Acme Inc.</span>
                       <span className="transaction-category">Salary</span>
                     </div>
-                    <span className="transaction-amount income">+$3,450.00</span>
+                    <span className="transaction-amount income">+₹3,450.00</span>
                   </div>
                   <div className="transaction-item">
                     <div className="transaction-icon entertainment"></div>
@@ -241,7 +243,7 @@ const HomePage = () => {
                       <span className="transaction-name">Netflix</span>
                       <span className="transaction-category">Entertainment</span>
                     </div>
-                    <span className="transaction-amount expense">-$14.99</span>
+                    <span className="transaction-amount expense">-₹14.99</span>
                   </div>
                 </div>
               </div>
@@ -273,7 +275,7 @@ const HomePage = () => {
           
           <div className="testimonial-card">
             <div className="testimonial-content">
-              <p>"I've tried many finance apps, but the insights from FinFlow have helped me save an additional $400 per month."</p>
+              <p>"I've tried many finance apps, but the insights from FinFlow have helped me save an additional ₹400 per month."</p>
             </div>
             <div className="testimonial-author">
               <div className="author-image"></div>
