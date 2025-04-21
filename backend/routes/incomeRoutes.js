@@ -50,9 +50,7 @@ router.get('/monthwise-net/:year?', protect, async (req, res) => {
 // Get all income for a user
 router.get('/get', protect, async (req, res) => {
   try {
-    console.log('Fetching incomes for user:', req.user._id);
     const incomes = await Income.find({ user: req.user._id });
-    console.log('Incomes found:', incomes);
     res.json(incomes);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error: error.message });

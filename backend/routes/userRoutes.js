@@ -10,7 +10,6 @@ const { body, validationResult } = require('express-validator');
 const emailRegex = "/^[\\w-\\.]+@[\\w-\\.]+(\\.\\w{2,3})+$/"; // Basic email validation regex
 
 // Register a new user
-// Register a new user
 router.post('/register', [
   body('email').isEmail().withMessage('Please enter a valid email'),
   body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long'),
