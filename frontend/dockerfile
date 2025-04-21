@@ -1,0 +1,18 @@
+FROM node:20
+
+WORKDIR /app
+
+# Copy and install dependencies
+COPY package*.json ./
+
+# ✅ Force rollup to avoid native builds
+ENV ROLLUP_USE_NODE_JS=true
+
+RUN npm install
+
+# Copy rest of the app
+COPY . .
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev", "--", "--host"]
