@@ -36,7 +36,7 @@ const AddExpense = ({ refetchExpenses, setRefetchExpenses }) => {
       },
     };
     try {
-      await axios.post('http://localhost:5000/api/expenses/add', formData, config);
+      await axios.post('http://localhost:8000/api/expenses/add', formData, config);
       setFormData({
         category: '',
         amount: '',

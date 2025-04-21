@@ -26,7 +26,7 @@ const DisplayExpenses = ({ onUpdateClick, refetchExpenses, expenses: propExpense
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.get('http://localhost:5000/api/expenses/get', config);
+        const response = await axios.get('http://localhost:8000/api/expenses/get', config);
         setExpenses(response.data);
       } catch (err) {
         if (err.response && err.response.status === 401) {
@@ -66,7 +66,7 @@ const DisplayExpenses = ({ onUpdateClick, refetchExpenses, expenses: propExpense
           Authorization: `Bearer ${token}`,
         },
       };
-      await axios.delete(`http://localhost:5000/api/expenses/delete/${id}`, config);
+      await axios.delete(`http://localhost:8000/api/expenses/delete/${id}`, config);
       
       // Update local state if we're managing our own data
       if (!propExpenses) {

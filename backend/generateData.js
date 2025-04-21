@@ -14,7 +14,7 @@
     "Furniture": [500, 1200, 2500],
     "Emergency": [200, 800, 2000],
     "Groceries/Home Supplies": [150, 400, 900],
-    "Education fees": [1000, 3000, 5000],
+    "Education fees": [1000, 3000, 8000],
     "House Bills": [200, 500, 1000],
     "Services/Hired Help": [100, 250, 600],
     "Loan payment": [500, 1000, 3000],
@@ -37,7 +37,7 @@
   }
 
   const generateData = async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MDY0NTk3ZTZiNDI1OTUyYjA0NzExMCIsImlhdCI6MTc0NTI0MTUxMCwiZXhwIjoxNzQ1MjQ1MTEwfQ.z1NZAutfutBOUR0RGZwyPzWh3qrjqxWCNYiUBqQe8oE';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MDY0NGMxZThmM2IyYWM4NWFmNzViOCIsImlhdCI6MTc0NTI0MTI5MiwiZXhwIjoxNzQ1MjQ0ODkyfQ.b90HAPQReVZh92tn8JJB28fp95_cDw21LFzwBfc3HUo';
 
     for (let month = 1; month <= 12; month++) {
       let monthlyExpenses = [];
@@ -46,7 +46,7 @@
       for (let i = 0; i < 10; i++) {
         let category = Object.keys(expenseAmounts)[Math.floor(Math.random() * Object.keys(expenseAmounts).length)];
         let amount = generateAmount(expenseAmounts[category]);
-        if (totalExpense + amount <= 6000) {
+        if (totalExpense + amount <= 8000) {
           monthlyExpenses.push({ category, amount });
           totalExpense += amount;
         }
@@ -55,7 +55,7 @@
       for (let i = 0; i < 4; i++) {
         let category = expenseCategories[Math.floor(Math.random() * expenseCategories.length)];
         let amount = Math.floor(Math.random() * 500) + 50;
-        if (totalExpense + amount <= 6000) {
+        if (totalExpense + amount <= 8000) {
           monthlyExpenses.push({ category, amount });
           totalExpense += amount;
         }
@@ -68,7 +68,7 @@
           date: new Date(2025, month - 1, Math.floor(Math.random() * 28) + 1).toISOString().split('T')[0],
         };
 
-        await fetch('http://localhost:5000/api/expenses/add', {
+        await fetch('http://localhost:8000/api/expenses/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@
           amount: income.amount,
           date: new Date(2025, month - 1, income.frequency).toISOString().split('T')[0],
         };
-        await fetch('http://localhost:5000/api/incomes/add', {
+        await fetch('http://localhost:8000/api/incomes/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -99,10 +99,10 @@
       if (giftMonths.has(month)) {
         const incomeData = {
           source: 'gift money',
-          amount: 5000,
+          amount: 8000,
           date: new Date(2025, month - 1, 15).toISOString().split('T')[0],
         };
-        await fetch('http://localhost:5000/api/incomes/add', {
+        await fetch('http://localhost:8000/api/incomes/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

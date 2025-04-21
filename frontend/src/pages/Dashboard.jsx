@@ -26,7 +26,7 @@ const Dashboard = () => {
         console.error("No token found in localStorage");
         return;
       }
-      const response = await axios.get('http://localhost:5000/api/finance-overview', config);
+      const response = await axios.get('http://localhost:8000/api/finance-overview', config);
       setFinanceOverview(response.data);
       setData({
         labels: ['Expenses', 'Incomes'],

@@ -41,7 +41,7 @@ const UpdateExpense = ({ expense, onClose }) => {
         },
       };
 
-      await axios.put(`http://localhost:5000/api/expenses/update/${expense._id}`, { category, amount, date }, config);
+      await axios.put(`http://localhost:6000/api/expenses/update/${expense._id}`, { category, amount, date }, config);
 
       onClose();
       setShowAlert(true);
