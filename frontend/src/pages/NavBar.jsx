@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaChartLine, FaRobot, FaRegLightbulb, FaRegChartBar, FaPlus, FaArrowDown, FaArrowRight } from 'react-icons/fa';
 import '../styles/NavBar.css';
 import ParticleBackground from '../components/ParticleBackground';
+import ChatbotIcon from '../components/ChatbotIcon';
 
 const NavBar = () => {
     return (
@@ -25,6 +26,7 @@ const NavBar = () => {
                 </div>
             </div>
         </header>
+        <ChatbotIcon />
         </div>
     )
 }
