@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          
+          &copy; {new Date().getFullYear()} FinFlow. All rights reserved.
         </div>
       </footer>
     </div>

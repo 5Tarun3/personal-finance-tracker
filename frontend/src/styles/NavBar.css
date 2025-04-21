@@ -43,7 +43,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: auto !important;
+    height: 15% !important;
     z-index: 100;
     padding: 0.2rem 0 !important;
     background: rgba(18, 18, 24, 0.8);
@@ -63,13 +63,18 @@
   }
   
   .brand-name {
-    font-size: 2.5rem !important;
+    font-size: 4rem !important;
     font-weight: 700;
     background: linear-gradient(90deg, #4CD964 0%, #5E5CE6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 0;
+  }
+
+  .brand-container {
+    margin-top: 0.5%;
+    display: flex;
   }
   
   .main-nav ul {

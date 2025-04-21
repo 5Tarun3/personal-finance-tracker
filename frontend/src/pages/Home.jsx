@@ -29,6 +29,13 @@ const HomePage = () => {
       icon: <FaRegLightbulb />,
       color: "#FF9500",
       delay: 0.6
+    },
+    {
+      title: "Budget Optimization",
+      description: "Maximize your savings with smart budgeting tools that adapt to your spending habits.",
+      icon: <FaRegChartBar />,
+      color: "#4A90E2",
+      delay: 0.8
     }
   ];
 
@@ -67,21 +74,7 @@ const HomePage = () => {
               </div>
               <div className="preview-charts">
                 <div className="chart-container">
-                  <div className="chart-header">
-                    <h4>Monthly Spending</h4>
-                    <span className="chart-period">Last 30 Days</span>
-                  </div>
-                  <div className="mock-chart">
-                    <div className="bar-chart">
-                      <div className="bar" style={{ height: '60%', backgroundColor: '#4CD964' }}></div>
-                      <div className="bar" style={{ height: '80%', backgroundColor: '#4CD964' }}></div>
-                      <div className="bar" style={{ height: '45%', backgroundColor: '#4CD964' }}></div>
-                      <div className="bar" style={{ height: '75%', backgroundColor: '#4CD964' }}></div>
-                      <div className="bar" style={{ height: '30%', backgroundColor: '#4CD964' }}></div>
-                      <div className="bar" style={{ height: '65%', backgroundColor: '#4CD964' }}></div>
-                      <div className="bar" style={{ height: '50%', backgroundColor: '#4CD964' }}></div>
-                    </div>
-                  </div>
+                  
                 </div>
                 <div className="stats-container">
                   <div className="stat-item">
