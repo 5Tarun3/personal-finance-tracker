@@ -54,7 +54,7 @@ const ChatbotPage = () => {
       // Get general finance overview data for most queries
       if (lowerQuery.includes('finance') || lowerQuery.includes('overview') || 
           lowerQuery.includes('summary') || lowerQuery.includes('money')) {
-        dataPackage.financeOverview = await callFinancialAPI('/finance-overview/finance-overview');
+        dataPackage.financeOverview = await callFinancialAPI('/finance-overview');
       }
       
       // Get expense data
@@ -79,13 +79,13 @@ const ChatbotPage = () => {
       // Get income data
       if (lowerQuery.includes('income') || lowerQuery.includes('earn') || 
           lowerQuery.includes('revenue') || lowerQuery.includes('money')) {
-        dataPackage.incomes = await callFinancialAPI('/income/get');
-        dataPackage.totalIncome = await callFinancialAPI('/income/total');
+        dataPackage.incomes = await callFinancialAPI('/incomes/get');
+        dataPackage.totalIncome = await callFinancialAPI('/incomes/total');
         
         // Get monthly income if time is mentioned
         if (lowerQuery.includes('month') || lowerQuery.includes('trend') || 
             lowerQuery.includes('time') || lowerQuery.includes('year')) {
-          dataPackage.monthlyIncome = await callFinancialAPI(`/income/monthwise-total/${currentYear}`);
+          dataPackage.monthlyIncome = await callFinancialAPI(`/incomes/monthwise-total/${currentYear}`);
         }
       }
       
@@ -93,7 +93,7 @@ const ChatbotPage = () => {
       if ((lowerQuery.includes('income') && lowerQuery.includes('expense')) || 
           lowerQuery.includes('vs') || lowerQuery.includes('versus') || 
           lowerQuery.includes('compare') || lowerQuery.includes('net')) {
-        dataPackage.monthlyNet = await callFinancialAPI(`/income/monthwise-net/${currentYear}`);
+        dataPackage.monthlyNet = await callFinancialAPI(`/incomes/monthwise-net/${currentYear}`);
       }
       
       // Get user profile data if relevant
