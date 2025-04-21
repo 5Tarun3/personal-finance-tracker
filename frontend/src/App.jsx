@@ -10,8 +10,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import ExpenseManager from './pages/ExpenseManager';
 import IncomeManager from './pages/IncomeManager'; // Import IncomeManager
-import ProfilePage
- from './pages/ProfilePage';
+import ProfilePage from './pages/ProfilePage';
 function App() {
   return (
     <Router>
