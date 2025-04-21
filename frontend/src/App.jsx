@@ -18,7 +18,7 @@ function App() {
       <NavBar />
       <div className="min-h-screen flex flex-col">
         {/*<Navbar />*/}
-        <main className="flex-grow" style={{ paddingTop: '7rem' }}>
+        <main className="flex-grow" style={{ paddingTop: '8rem' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
