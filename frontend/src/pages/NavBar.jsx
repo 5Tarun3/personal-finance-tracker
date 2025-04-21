@@ -16,6 +16,7 @@ const NavBar = () => {
                 <ul>
                     <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/chatbot">Chatbot</a></li>
+                    <li><a href="/Profile">Profile</a></li>
                 </ul>
                 </nav>
                 <div className="auth-buttons">
