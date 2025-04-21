@@ -36,25 +36,7 @@ const HomePage = () => {
     <div className="home-page">
       <ParticleBackground />
 
-      {/* Header Section */}
-      <header className="home-header">
-        <div className="header-content">
-          <div className="brand-container">
-            <h1 className="brand-name">FinFlow</h1>
-          </div>
-          <nav className="main-nav">
-            <ul>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#dashboard">Dashboard</a></li>
-              <li><a href="#testimonials">Testimonials</a></li>
-            </ul>
-          </nav>
-          <div className="auth-buttons">
-            <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
-            <button className="signup-btn" onClick={() => navigate("/signup")}>Get Started</button>
-          </div>
-        </div>
-      </header>
+      
       
       {/* Hero Section */}
       <section className="hero-section">
@@ -336,51 +318,7 @@ const HomePage = () => {
         </div>
       </section>
       
-      {/* Footer */}
-      <footer className="home-footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <h2>FinFlow</h2>
-            <p>Your financial journey, simplified.</p>
-          </div>
-          
-          <div className="footer-links">
-            <div className="footer-column">
-              <h3>Product</h3>
-              <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
-              </ul>
-            </div>
-            
-            <div className="footer-column">
-              <h3>Resources</h3>
-              <ul>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#guides">Guides</a></li>
-                <li><a href="#support">Support</a></li>
-                <li><a href="#api">API</a></li>
-              </ul>
-            </div>
-            
-            <div className="footer-column">
-              <h3>Company</h3>
-              <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#careers">Careers</a></li>
-                <li><a href="#privacy">Privacy</a></li>
-                <li><a href="#terms">Terms</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div className="footer-bottom">
-          
-        </div>
-      </footer>
+      
     </div>
   );
 };

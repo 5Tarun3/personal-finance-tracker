@@ -16,7 +16,7 @@ const LoginPage = () => {
     
     // Grid points for connection effect
     const points = [];
-    const pointCount = Math.floor(window.innerWidth * window.innerHeight / 15000);
+    const pointCount = Math.floor(window.innerWidth * window.innerHeight / 18000);
     
     // Create points
     for (let i = 0; i < pointCount; i++) {

@@ -30,7 +30,7 @@ app.get('/api/users/register', (req, res) => {
   res.send('Hello from backend!');
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 
 // Global error handler
 app.use((err, req, res, next) => {

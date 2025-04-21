@@ -26,7 +26,7 @@ const DisplayIncomes = ({ onUpdateClick, refetchIncomes, incomes: propIncomes })
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.get('http://localhost:5000/api/incomes/get', config);
+        const response = await axios.get('http://localhost:8000/api/incomes/get', config);
         setIncomes(response.data);
       } catch (err) {
         if (err.response && err.response.status === 401) {
@@ -66,7 +66,7 @@ const DisplayIncomes = ({ onUpdateClick, refetchIncomes, incomes: propIncomes })
           Authorization: `Bearer ${token}`,
         },
       };
-      await axios.delete(`http://localhost:5000/api/incomes/delete/${id}`, config);
+      await axios.delete(`http://localhost:8000/api/incomes/delete/${id}`, config);
       
       // Update local state if we're managing our own data
       if (!propIncomes) {

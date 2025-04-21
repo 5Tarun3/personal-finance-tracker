@@ -64,7 +64,7 @@ const ExpenseManager = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get('http://localhost:5000/api/expenses/get', config);
+      const response = await axios.get('http://localhost:8000/api/expenses/get', config);
       return response.data;
     } catch (error) {
       console.error("Error fetching expenses:", error);

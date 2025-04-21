@@ -28,7 +28,7 @@ const SignUpForm = () => {
       const { user } = userCredential;
 
       // Register user in the backend
-      await axios.post("http://localhost:5000/api/users/register", { 
+      await axios.post("http://localhost:8000/api/users/register", { 
         name: user.displayName, 
         email: user.email, 
         password: password,
@@ -50,7 +50,7 @@ const SignUpForm = () => {
       const { displayName, email } = user;
 
       // Register user in the backend
-      await axios.post("http://localhost:5000/api/users/register", { 
+      await axios.post("http://localhost:8000/api/users/register", { 
         name: displayName, 
         email: email, 
         password: "e23Dk2kd2&i4o5$",

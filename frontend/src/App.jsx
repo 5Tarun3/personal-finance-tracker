@@ -3,21 +3,22 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import BudgetingTools from './pages/BudgetingTools';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import ExpenseManager from './pages/ExpenseManager';
 import IncomeManager from './pages/IncomeManager'; // Import IncomeManager
+import NavBar from './pages/NavBar';
+import Footer from './pages/Footer';
 import ProfilePage
  from './pages/ProfilePage';
 function App() {
   return (
     <Router>
+      <NavBar />
       <div className="min-h-screen flex flex-col">
         {/*<Navbar />*/}
-        <main className="flex-grow">
+        <main className="flex-grow" style={{ paddingTop: '7rem' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -31,6 +32,7 @@ function App() {
           </Routes>
         </main>
         {/*<Footer />*/}
+        <Footer/>
       </div>
     </Router>
   );

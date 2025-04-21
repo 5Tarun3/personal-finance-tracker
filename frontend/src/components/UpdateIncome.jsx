@@ -40,7 +40,7 @@ const UpdateIncome = ({ income, onClose }) => {
         },
       };
 
-      await axios.put(`http://localhost:5000/api/incomes/update/${income._id}`, { source, amount, date }, config);
+      await axios.put(`http://localhost:8000/api/incomes/update/${income._id}`, { source, amount, date }, config);
 
       onClose();
       setShowAlert(true);

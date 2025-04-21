@@ -47,8 +47,8 @@ const FinancePieChart = ({ type = 'expense' }) => {
       try {
         const token = localStorage.getItem('token');
         const endpoint = type === 'expense' ? 
-          'http://localhost:5000/api/expenses/get' : 
-          'http://localhost:5000/api/incomes/get';
+          'http://localhost:8000/api/expenses/get' : 
+          'http://localhost:8000/api/incomes/get';
         
         const response = await fetch(endpoint, {
           headers: {

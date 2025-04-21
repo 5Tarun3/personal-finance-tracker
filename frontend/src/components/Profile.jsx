@@ -63,7 +63,7 @@ const Profile = () => {
     };
 
     const usageData = [
-        { label: 'Jan', value: 5000 },
+        { label: 'Jan', value: 8000 },
         { label: 'Feb', value: 7500 },
         { label: 'Mar', value: 8000 },
         { label: 'Apr', value: 6500 },
