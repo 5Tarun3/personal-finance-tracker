@@ -14,14 +14,13 @@ const NavBar = () => {
                 </div>
                 <nav className="main-nav">
                 <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#dashboard">Dashboard</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/chatbot">Chatbot</a></li>
                 </ul>
                 </nav>
                 <div className="auth-buttons">
-                <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
-                <button className="signup-btn" onClick={() => navigate("/signup")}>Get Started</button>
+                <a href="/login"><button className="login-btn" onClick={() => navigate("/login")}>Login</button></a>
+                <a href="/signup"><button className="signup-btn" onClick={() => navigate("/signup")}>Get Started</button></a>
                 </div>
             </div>
         </header>

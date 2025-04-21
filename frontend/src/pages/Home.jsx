@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaChartLine, FaRobot, FaRegLightbulb, FaRegChartBar, FaPlus, FaArrowDown, FaArrowRight } from 'react-icons/fa';
+import { FaChartLine, FaRobot, FaRegLightbulb, FaRegChartBar, FaPlus, FaArrowDown, FaArrowUp,FaArrowRight } from 'react-icons/fa';
 import '../styles/HomePage.css';
 import ParticleBackground from '../components/ParticleBackground';
 
@@ -84,7 +84,7 @@ const HomePage = () => {
                     <div className="stat-details">
                       <span className="stat-title">Income</span>
                       <span className="stat-value">$5,230</span>
-                      <span className="stat-change positive">+12% <FaArrowRight /></span>
+                      <span className="stat-change positive">+12% <FaArrowUp /></span>
                     </div>
                   </div>
                   <div className="stat-item">
@@ -94,7 +94,7 @@ const HomePage = () => {
                     <div className="stat-details">
                       <span className="stat-title">Expenses</span>
                       <span className="stat-value">$3,180</span>
-                      <span className="stat-change negative">-8% <FaArrowRight /></span>
+                      <span className="stat-change negative">-8% <FaArrowDown /></span>
                     </div>
                   </div>
                   <div className="stat-item">
@@ -104,7 +104,7 @@ const HomePage = () => {
                     <div className="stat-details">
                       <span className="stat-title">Savings</span>
                       <span className="stat-value">$2,050</span>
-                      <span className="stat-change positive">+24% <FaArrowRight /></span>
+                      <span className="stat-change positive">+24% <FaArrowUp /></span>
                     </div>
                   </div>
                 </div>

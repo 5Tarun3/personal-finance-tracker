@@ -10,8 +10,9 @@ import ExpenseManager from './pages/ExpenseManager';
 import IncomeManager from './pages/IncomeManager'; // Import IncomeManager
 import NavBar from './pages/NavBar';
 import Footer from './pages/Footer';
-import ProfilePage
- from './pages/ProfilePage';
+import ProfilePage from './pages/ProfilePage';
+import ChatbotPage from './pages/ChatbotPage';
+
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
             <Route path="/ExpenseManager" element={<ExpenseManager/>} />
             <Route path="/IncomeManager" element={<IncomeManager/>} /> 
             <Route path="/Profile" element={<ProfilePage />}/>
+            <Route path="/chatbot" element={<ChatbotPage />} />
           </Routes>
         </main>
         {/*<Footer />*/}
