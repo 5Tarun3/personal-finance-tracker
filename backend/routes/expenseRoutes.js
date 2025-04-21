@@ -83,4 +83,120 @@ router.get('/finance-overview', protect, async (req, res) => {
   }
 });
 
+const mongoose = require('mongoose');
+
+// Helper function to map categories to overarching categories
+const categoryGroups = {
+  "Essentials": [
+    "Food",
+    "Groceries/Home Supplies",
+    "House Bills",
+    "Education fees",
+    "Loan payment",
+    "Services/Hired Help",
+    "Emergency"
+  ],
+  "Lifestyle": [
+    "Entertainment/Luxury",
+    "Travel",
+    "Furniture",
+    "Miscellaneous"
+  ]
+};
+
+function getOverarchingCategory(category) {
+  for (const [group, categories] of Object.entries(categoryGroups)) {
+    if (categories.includes(category)) {
+      return group;
+    }
+  }
+  return "Other";
+}
+
+// Monthly expense totals grouped by category for selected year
+router.get('/category-trend/:year', protect, async (req, res) => {
+  try {
+    const year = parseInt(req.params.year, 10) || new Date().getFullYear();
+    const startDate = new Date(year, 0, 1);
+    const endDate = new Date(year + 1, 0, 1);
+
+    const pipeline = [
+      { $match: { user: mongoose.Types.ObjectId(req.user._id), date: { $gte: startDate, $lt: endDate } } },
+      {
+        $group: {
+          _id: {
+            month: { $month: "$date" },
+            category: "$category"
+          },
+          totalAmount: { $sum: "$amount" }
+        }
+      },
+      {
+        $group: {
+          _id: "$_id.month",
+          categories: {
+            $push: {
+              category: "$_id.category",
+              totalAmount: "$totalAmount"
+            }
+          }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ];
+
+    const results = await Expense.aggregate(pipeline);
+
+    // Format data for frontend: array of months with category totals
+    const formatted = results.map(monthData => {
+      const month = monthData._id;
+      const categories = monthData.categories.reduce((acc, curr) => {
+        acc[curr.category] = curr.totalAmount;
+        return acc;
+      }, {});
+      return { month, categories };
+    });
+
+    res.json(formatted);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+});
+
+// Hierarchical expense data grouped by overarching category and category
+router.get('/hierarchical-spending', protect, async (req, res) => {
+  try {
+    const expenses = await Expense.find({ user: req.user._id });
+
+    // Aggregate totals by category
+    const totalsByCategory = {};
+    expenses.forEach(expense => {
+      const overarching = getOverarchingCategory(expense.category);
+      if (!totalsByCategory[overarching]) {
+        totalsByCategory[overarching] = {};
+      }
+      if (!totalsByCategory[overarching][expense.category]) {
+        totalsByCategory[overarching][expense.category] = 0;
+      }
+      totalsByCategory[overarching][expense.category] += expense.amount;
+    });
+
+    // Format data for sunburst/treemap chart
+    const data = {
+      name: "Expenses",
+      children: Object.entries(totalsByCategory).map(([overarching, categories]) => ({
+        name: overarching,
+        children: Object.entries(categories).map(([category, amount]) => ({
+          name: category,
+          value: amount
+        }))
+      }))
+    };
+
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+});
+
 module.exports = router;
