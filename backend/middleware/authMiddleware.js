@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const protect = async (req, res, next) => {
-  console.log("Received Token:", req.headers.authorization); // Debugging log for received token
 
   let token;
 

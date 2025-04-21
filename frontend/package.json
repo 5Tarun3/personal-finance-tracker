@@ -10,8 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@visx/hierarchy": "^3.12.0",
+    "@visx/visx": "^3.12.0",
     "axios": "^1.8.4",
     "chart.js": "^4.4.4",
+    "d3": "^7.9.0",
+    "d3-hierarchy": "^3.1.2",
+    "d3-scale-chromatic": "^3.1.0",
     "exceljs": "^4.4.0",
     "express-validator": "^7.2.0",
     "file-saver": "^2.0.5",
@@ -30,6 +35,8 @@
     "sheetjs": "^2.0.0",
     "sheetjs-style": "^0.15.8",
     "styled-components": "^6.1.13",
+    "sunburst": "^2.0.0",
+    "sunburst-chart": "^1.21.4",
     "three": "^0.174.0"
   },
   "devDependencies": {

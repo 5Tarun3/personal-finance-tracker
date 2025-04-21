@@ -26,7 +26,7 @@ const SpendingHabitsRadarChart = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get('http://localhost:5000/api/expenses/get', config);
+      const response = await axios.get('http://localhost:8000/api/expenses/get', config);
       const expenses = response.data;
 
       // Aggregate totals by category
@@ -76,20 +76,45 @@ const SpendingHabitsRadarChart = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: '#fff', // Bright white by default
+          generateLabels: (chart) => {
+            const colors = [
+              '#FF6384', // Bright pink
+              '#36A2EB', // Bright blue
+              '#FFCE56', // Bright yellow
+              '#4BC0C0', // Bright cyan
+              '#9966FF', // Bright purple
+              '#FF9F40', // Bright orange
+            ];
+            return chart.data.datasets.map((dataset, i) => ({
+              text: dataset.label,
+              fillStyle: colors[i % colors.length],
+              strokeStyle: colors[i % colors.length],
+              lineWidth: 2,
+              hidden: !chart.isDatasetVisible(i),
+              index: i,
+            }));
+          },
+        },
       },
       title: {
         display: true,
         text: 'Spending Habits Breakdown',
+        color: '#fff',
+        font: {
+          size: 18,
+        },
       },
       tooltip: {
         callbacks: {
-          label: function(context) {
+          label: function (context) {
             const label = context.label || '';
             const value = context.raw || 0;
             return `${label}: ${(value * 100).toFixed(1)}% of max spending`;
-          }
-        }
-      }
+          },
+        },
+      },
     },
     scales: {
       r: {
@@ -98,15 +123,31 @@ const SpendingHabitsRadarChart = () => {
         ticks: {
           stepSize: 0.2,
           callback: (value) => `${value * 100}%`,
+          color: '#fff', // Bright ticks
+          backdropColor: 'transparent',
+          font: {
+            size: 12,
+          },
         },
         pointLabels: {
           font: {
             size: 14,
           },
+          color: '#fff', // Bright white labels
+        },
+        grid: {
+          color: 'rgba(153, 102, 255, 0.6)', // Bright purple circles
+          lineWidth: 2,
+        },
+        angleLines: {
+          color: 'rgba(153, 102, 255, 0.6)', // Bright purple angle lines
+          lineWidth: 1.5,
         },
       },
     },
   };
+  
+  
 
   return <Radar ref={chartRef} data={data} options={options} />;
 };

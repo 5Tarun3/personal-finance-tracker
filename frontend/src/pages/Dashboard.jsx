@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AnimatedButton from '../components/AnimatedButton';
 import FinancePieChart from '../components/FinancePieChart';
-
-
+import CumulativeNetWorthLineChart from '../components/CumulativeNetWorthLineChart';
+import IncomeVsExpenseLineChart from '../components/IncomeVsExpenseLineChart';
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
@@ -88,8 +88,11 @@ const Dashboard = () => {
             <h3 className="text-gold-300">Current Month Income: ₹{financeOverview.totalIncomes}</h3>
             <h3 className="text-gold-300">Net: {financeOverview.net > 0 ? `₹${financeOverview.net} Gain` : `₹${Math.abs(financeOverview.net)} Loss`}</h3>
             <ChartVisualization data={data} />
+            
           </div>
         )}
+        <CumulativeNetWorthLineChart />
+        <IncomeVsExpenseLineChart />
         <FinancePieChart type="expense" />
         <FinancePieChart type="income" />
       </div>

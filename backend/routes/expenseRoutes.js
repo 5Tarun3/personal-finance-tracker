@@ -4,7 +4,8 @@ const router = express.Router();
 const Expense = require('../models/Expense');
 const User = require('../models/User'); // Import User model
 const { protect } = require('../middleware/authMiddleware');
-
+const mongoose = require('mongoose');
+const moment = require('moment');
 // Get all expenses for a user
 router.get('/get', protect, async (req, res) => {
   try {
@@ -83,8 +84,6 @@ router.get('/finance-overview', protect, async (req, res) => {
   }
 });
 
-const mongoose = require('mongoose');
-
 // Helper function to map categories to overarching categories
 const categoryGroups = {
   "Essentials": [
@@ -121,7 +120,7 @@ router.get('/category-trend/:year', protect, async (req, res) => {
     const endDate = new Date(year + 1, 0, 1);
 
     const pipeline = [
-      { $match: { user: mongoose.Types.ObjectId(req.user._id), date: { $gte: startDate, $lt: endDate } } },
+      { $match: { user: new mongoose.Types.ObjectId(req.user._id), date: { $gte: startDate, $lt: endDate } } },
       {
         $group: {
           _id: {
@@ -163,38 +162,84 @@ router.get('/category-trend/:year', protect, async (req, res) => {
   }
 });
 
-// Hierarchical expense data grouped by overarching category and category
-router.get('/hierarchical-spending', protect, async (req, res) => {
-  try {
-    const expenses = await Expense.find({ user: req.user._id });
+  // Hierarchical expense data grouped by overarching category and category
+  router.get('/hierarchical-spending', protect, async (req, res) => {
+    try {
+      const expenses = await Expense.find({ user: req.user._id });
 
-    // Aggregate totals by category
-    const totalsByCategory = {};
-    expenses.forEach(expense => {
-      const overarching = getOverarchingCategory(expense.category);
-      if (!totalsByCategory[overarching]) {
-        totalsByCategory[overarching] = {};
-      }
-      if (!totalsByCategory[overarching][expense.category]) {
-        totalsByCategory[overarching][expense.category] = 0;
-      }
-      totalsByCategory[overarching][expense.category] += expense.amount;
-    });
+      // Aggregate totals by category
+      const totalsByCategory = {};
+      expenses.forEach(expense => {
+        const overarching = getOverarchingCategory(expense.category);
+        if (!totalsByCategory[overarching]) {
+          totalsByCategory[overarching] = {};
+        }
+        if (!totalsByCategory[overarching][expense.category]) {
+          totalsByCategory[overarching][expense.category] = 0;
+        }
+        totalsByCategory[overarching][expense.category] += expense.amount;
+      });
 
-    // Format data for sunburst/treemap chart
-    const data = {
-      name: "Expenses",
-      children: Object.entries(totalsByCategory).map(([overarching, categories]) => ({
-        name: overarching,
-        children: Object.entries(categories).map(([category, amount]) => ({
-          name: category,
-          value: amount
+      // Ensure all categories from categoryGroups are included with zero if missing
+      for (const [group, categories] of Object.entries(categoryGroups)) {
+        if (!totalsByCategory[group]) {
+          totalsByCategory[group] = {};
+        }
+        categories.forEach(category => {
+          if (!(category in totalsByCategory[group])) {
+            totalsByCategory[group][category] = 0;
+          }
+        });
+      }
+
+      // Format data for sunburst/treemap chart
+      const data = {
+        name: "Expenses",
+        children: Object.entries(totalsByCategory).map(([overarching, categories]) => ({
+          name: overarching,
+          children: Object.entries(categories).map(([category, amount]) => ({
+            name: category,
+            value: amount
+          }))
         }))
-      }))
-    };
+      };
 
-    res.json(data);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ message: 'Server Error', error: error.message });
+    }
+  });
+
+
+
+// Monthwise total expense for a given year
+router.get('/monthwise-total/:year?', protect, async (req, res) => {
+  try {
+    const year = parseInt(req.params.year, 10) || new Date().getFullYear();
+    const currentDate = moment(`${year}-01-01`, 'YYYY-MM-DD');
+    const totalData = [];
+
+    for (let i = 0; i < 12; i++) {
+      const monthStart = currentDate.clone().startOf('month');
+      const monthEnd = currentDate.clone().endOf('month');
+
+      const expenses = await Expense.aggregate([
+        {
+      $match: {
+        user: new mongoose.Types.ObjectId(req.user._id),
+        date: { $gte: monthStart.toDate(), $lte: monthEnd.toDate() },
+      },
+        },
+        { $group: { _id: null, total: { $sum: '$amount' } } },
+      ]);
+
+      const totalExpense = expenses.length > 0 ? expenses[0].total : 0;
+      totalData.push({ month: monthStart.format('MMMM'), total: totalExpense });
+      currentDate.add(1, 'month');
+    }
+    res.json(totalData);
   } catch (error) {
+    console.error('Error fetching monthwise total expense:', error);
     res.status(500).json({ message: 'Server Error', error: error.message });
   }
 });

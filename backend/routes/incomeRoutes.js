@@ -127,4 +127,37 @@ router.get('/total', protect, async (req, res) => {
     res.status(500).json({ message: 'Server Error', error: error.message });
   }
 });
+
+// Monthwise total income for a given year
+router.get('/monthwise-total/:year?', protect, async (req, res) => {
+  try {
+    const year = parseInt(req.params.year, 10) || new Date().getFullYear();
+    const currentDate = moment(`${year}-01-01`, 'YYYY-MM-DD');
+    const totalData = [];
+
+    for (let i = 0; i < 12; i++) {
+      const monthStart = currentDate.clone().startOf('month');
+      const monthEnd = currentDate.clone().endOf('month');
+
+      const incomes = await Income.aggregate([
+        {
+          $match: {
+            user: req.user._id,
+            date: { $gte: monthStart.toDate(), $lte: monthEnd.toDate() },
+          },
+        },
+        { $group: { _id: null, total: { $sum: '$amount' } } },
+      ]);
+
+      const totalIncome = incomes.length > 0 ? incomes[0].total : 0;
+      totalData.push({ month: monthStart.format('MMMM'), total: totalIncome });
+      currentDate.add(1, 'month');
+    }
+    res.json(totalData);
+  } catch (error) {
+    console.error('Error fetching monthwise total income:', error);
+    res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+});
+
 module.exports = router;

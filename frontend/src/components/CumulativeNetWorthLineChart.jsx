@@ -26,7 +26,7 @@ const CumulativeNetWorthLineChart = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get(`http://localhost:5000/api/incomes/monthwise-net/${year}`, config);
+      const response = await axios.get(`http://localhost:8000/api/incomes/monthwise-net/${year}`, config);
       const months = response.data.map(item => item.month);
       const netAmounts = response.data.map(item => item.net);
 

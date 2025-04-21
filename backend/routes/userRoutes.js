@@ -22,7 +22,6 @@ if (!errors.isEmpty()) {
 }
 try {
   const { name, email, password, passwordCheck, googleLogin } = req.body;
-  console.log(req.body); // Debugging log to check incoming request body
 
   if (!name || !email || (req.body.password && !passwordCheck)) {
     return res.status(400).json({ msg: "Not all fields have been entered" });
