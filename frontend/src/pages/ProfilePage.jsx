@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
+import profilePic from '../assets/photo.png'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -129,8 +130,10 @@ const ProfilePage = () => {
     <div className="bg-[#121317] min-h-screen text-white flex">
       {/* Sidebar */}
       <div className="w-[280px] bg-[#1C1D22] p-6 flex flex-col">
-        {/* Profile Circle */}
-        <div className="w-40 h-40 rounded-full border-4 border-green-500 mx-auto mb-6"></div>
+      {/* Profile Circle with photo */}
+      <div className="w-40 h-40 rounded-full border-4 border-green-500 mx-auto mb-5 overflow-hidden">
+        <img src={profilePic} alt="Profile" className="w-full h-full object-cover" />
+      </div>
 
         {/* Profile Actions */}
         <div className="space-y-4 mt-6">

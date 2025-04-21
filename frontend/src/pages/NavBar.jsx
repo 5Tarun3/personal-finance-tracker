@@ -10,7 +10,7 @@ const NavBar = () => {
         <header className="home-header">
             <div className="header-content">
                 <div className="brand-container">
-                <h1 className="brand-name">FinFlow</h1>
+                <a href="/"><h1 className="brand-name">FinFlow</h1></a>
                 </div>
                 <nav className="main-nav">
                 <ul>
