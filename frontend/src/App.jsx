@@ -13,6 +13,9 @@ import Footer from './pages/Footer';
 import ProfilePage from './pages/ProfilePage';
 import ChatbotPage from './pages/ChatbotPage';
 
+
+
+
 function App() {
   return (
     <Router>

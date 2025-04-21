@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaChartLine, FaRobot, FaRegLightbulb, FaRegChartBar, FaPlus, FaArrowDown, FaArrowUp,FaArrowRight } from 'react-icons/fa';
 import '../styles/HomePage.css';
 import ParticleBackground from '../components/ParticleBackground';
+import Spline from '@splinetool/react-spline';
+
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -113,7 +115,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      
+      <Spline scene="https://prod.spline.design/jNmNZD3Z-2S94Z87/scene.splinecode" />
       {/* Features Section */}
       <section id="features" className="features-section">
         <div className="section-header">

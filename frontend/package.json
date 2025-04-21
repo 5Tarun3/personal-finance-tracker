@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@splinetool/react-spline": "^4.0.0",
     "@visx/hierarchy": "^3.12.0",
     "@visx/visx": "^3.12.0",
     "axios": "^1.8.4",
