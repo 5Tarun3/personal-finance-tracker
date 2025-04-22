@@ -26,6 +26,7 @@ const CategoryTrendOverTime = () => {
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedCategories, setSelectedCategories] = useState(majorCategories.slice(0, 5)); // Start with first 5 categories to avoid clutter
+  const [rawData, setRawData] = useState(null); // Store the raw data for reprocessing
 
   const fetchChartData = async (year) => {
     try {
@@ -45,6 +46,9 @@ const CategoryTrendOverTime = () => {
       const response = await axios.get(`http://localhost:8000/api/expenses/category-trend/${year}`, config);
       const data = response.data;
       console.log("Category trend data received:", data);
+      
+      // Store the raw data
+      setRawData(data);
       
       // Prepare labels (months)
       const monthLabels = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -107,12 +111,11 @@ const CategoryTrendOverTime = () => {
 
   // Re-process chart data when selected categories change
   useEffect(() => {
-    if (chartRef.current && chartRef.current.data) {
+    if (rawData) {
       const monthLabels = Array.from({ length: 12 }, (_, i) => i + 1);
-      const currentData = chartRef.current.chartInstance.data;
-      processChartData(monthLabels, currentData);
+      processChartData(monthLabels, rawData);
     }
-  }, [selectedCategories]);
+  }, [selectedCategories, rawData]);
 
   const options = {
     responsive: true,

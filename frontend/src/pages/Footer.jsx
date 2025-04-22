@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaChartLine, FaRobot, FaRegLightbulb, FaRegChartBar, FaPlus, FaArrowDown, FaArrowRight } from 'react-icons/fa';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 import ParticleBackground from '../components/ParticleBackground';
 
@@ -18,30 +17,30 @@ const Footer = () => {
             <div className="footer-column">
               <h3>Product</h3>
               <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
+                <li><Link to="/features">Features</Link></li>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><Link to="/pricing">Pricing</Link></li>
+                <li><Link to="/roadmap">Roadmap</Link></li>
               </ul>
             </div>
             
             <div className="footer-column">
               <h3>Resources</h3>
               <ul>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#guides">Guides</a></li>
-                <li><a href="#support">Support</a></li>
-                <li><a href="#api">API</a></li>
+                <li><Link to="/blog">Blog</Link></li>
+                <li><Link to="/guides">Guides</Link></li>
+                <li><Link to="/support">Support</Link></li>
+                <li><Link to="/api">API</Link></li>
               </ul>
             </div>
             
             <div className="footer-column">
               <h3>Company</h3>
               <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#careers">Careers</a></li>
-                <li><a href="#privacy">Privacy</a></li>
-                <li><a href="#terms">Terms</a></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/careers">Careers</Link></li>
+                <li><Link to="/privacy">Privacy</Link></li>
+                <li><Link to="/terms">Terms</Link></li>
               </ul>
             </div>
           </div>

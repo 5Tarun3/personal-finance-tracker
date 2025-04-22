@@ -5,6 +5,7 @@ import UpdateExpense from '../components/UpdateExpense';
 import DrillableSunburstChart from '../components/DrillableSunburstChart';
 import CategoryTrendOverTime from '../components/CategoryTrendOverTime';
 import SpendingHabitsRadarChart from '../components/SpendingHabitsRadarChart';
+import ExcelUploadButton from '../components/ExcelUploadButton';
 import { motion } from 'framer-motion';
 import { FaSearch, FaTimes, FaDownload, FaChartPie, FaChartLine, FaChartBar, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import axios from 'axios';
@@ -284,7 +285,7 @@ const ExpenseManager = () => {
             >
               <FaDownload /> Download Expense Data
             </motion.button>
-            
+            <ExcelUploadButton />
             <div className="flex-grow"></div>
             
             <div className="flex gap-2">
@@ -323,6 +324,71 @@ const ExpenseManager = () => {
             </div>
           </div>
 
+          
+          
+          {/* CHARTS */}
+          {activeCharts.categoryTrend && (
+            <motion.div
+              className="w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div 
+                className="flex justify-between items-center cursor-pointer bg-gray-800 p-4 rounded-t-lg border-b border-gray-700"
+                onClick={() => toggleChartCollapse('categoryTrend')}
+              >
+                <div className="flex items-center gap-2">
+                  <FaChartLine className="text-amber-400" />
+                  <h3 className="text-amber-400 font-bold">Category Trends Over Time</h3>
+                </div>
+                {collapsedSections.charts.categoryTrend ? <FaChevronDown className="text-white" /> : <FaChevronUp className="text-white" />}
+              </div>
+              {!collapsedSections.charts.categoryTrend && <CategoryTrendOverTime />}
+            </motion.div>
+          )}
+          
+          {activeCharts.sunburst && (
+            <motion.div
+              className="w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+            >
+              <div 
+                className="flex justify-between items-center cursor-pointer bg-gray-800 p-4 rounded-t-lg border-b border-gray-700"
+                onClick={() => toggleChartCollapse('sunburst')}
+              >
+                <div className="flex items-center gap-2">
+                  <FaChartPie className="text-amber-400" />
+                  <h3 className="text-amber-400 font-bold">Spending Distribution</h3>
+                </div>
+                {collapsedSections.charts.sunburst ? <FaChevronDown className="text-white" /> : <FaChevronUp className="text-white" />}
+              </div>
+              {!collapsedSections.charts.sunburst && <DrillableSunburstChart />}
+            </motion.div>
+          )}
+          
+          {activeCharts.radar && (
+            <motion.div
+              className="w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+            >
+              <div 
+                className="flex justify-between items-center cursor-pointer bg-gray-800 p-4 rounded-t-lg border-b border-gray-700"
+                onClick={() => toggleChartCollapse('radar')}
+              >
+                <div className="flex items-center gap-2">
+                  <FaChartBar className="text-amber-400" />
+                  <h3 className="text-amber-400 font-bold">Spending Habits Analysis</h3>
+                </div>
+                {collapsedSections.charts.radar ? <FaChevronDown className="text-white" /> : <FaChevronUp className="text-white" />}
+              </div>
+              {!collapsedSections.charts.radar && <SpendingHabitsRadarChart />}
+            </motion.div>
+          )}
           {/* Filter Section */}
           <motion.div 
             className="bg-gray-800 p-6 rounded-lg shadow-lg w-full mb-8" 
@@ -455,71 +521,6 @@ const ExpenseManager = () => {
               </div>
             )}
           </motion.div>
-          
-          {/* CHARTS */}
-          {activeCharts.categoryTrend && (
-            <motion.div
-              className="w-full"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div 
-                className="flex justify-between items-center cursor-pointer bg-gray-800 p-4 rounded-t-lg border-b border-gray-700"
-                onClick={() => toggleChartCollapse('categoryTrend')}
-              >
-                <div className="flex items-center gap-2">
-                  <FaChartLine className="text-amber-400" />
-                  <h3 className="text-amber-400 font-bold">Category Trends Over Time</h3>
-                </div>
-                {collapsedSections.charts.categoryTrend ? <FaChevronDown className="text-white" /> : <FaChevronUp className="text-white" />}
-              </div>
-              {!collapsedSections.charts.categoryTrend && <CategoryTrendOverTime />}
-            </motion.div>
-          )}
-          
-          {activeCharts.sunburst && (
-            <motion.div
-              className="w-full"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-            >
-              <div 
-                className="flex justify-between items-center cursor-pointer bg-gray-800 p-4 rounded-t-lg border-b border-gray-700"
-                onClick={() => toggleChartCollapse('sunburst')}
-              >
-                <div className="flex items-center gap-2">
-                  <FaChartPie className="text-amber-400" />
-                  <h3 className="text-amber-400 font-bold">Spending Distribution</h3>
-                </div>
-                {collapsedSections.charts.sunburst ? <FaChevronDown className="text-white" /> : <FaChevronUp className="text-white" />}
-              </div>
-              {!collapsedSections.charts.sunburst && <DrillableSunburstChart />}
-            </motion.div>
-          )}
-          
-          {activeCharts.radar && (
-            <motion.div
-              className="w-full"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
-            >
-              <div 
-                className="flex justify-between items-center cursor-pointer bg-gray-800 p-4 rounded-t-lg border-b border-gray-700"
-                onClick={() => toggleChartCollapse('radar')}
-              >
-                <div className="flex items-center gap-2">
-                  <FaChartBar className="text-amber-400" />
-                  <h3 className="text-amber-400 font-bold">Spending Habits Analysis</h3>
-                </div>
-                {collapsedSections.charts.radar ? <FaChevronDown className="text-white" /> : <FaChevronUp className="text-white" />}
-              </div>
-              {!collapsedSections.charts.radar && <SpendingHabitsRadarChart />}
-            </motion.div>
-          )}
-          
           {/* Expense List */}
           <motion.div
             className="bg-gray-700 p-6 rounded-lg shadow-md border-2 border-black-500 w-full mt-8"

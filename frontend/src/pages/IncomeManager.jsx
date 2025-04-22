@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddIncome from '../components/AddIncome';
 import DisplayIncomes from '../components/DisplayIncomes';
 import UpdateIncome from '../components/UpdateIncome';
+import ExcelUploadIncomeButton from '../components/ExcelUploadIncomeButton';
 import { motion } from 'framer-motion';
 import { FaSearch, FaTimes, FaDownload } from 'react-icons/fa';
 import axios from 'axios';
@@ -229,6 +230,7 @@ const IncomeManager = () => {
           </motion.div>
 
           {/* Download Button */}
+          <div className="flex flex-col" >
           <motion.button
             onClick={downloadExcel}
             className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded flex items-center gap-2 mb-4"
@@ -236,7 +238,9 @@ const IncomeManager = () => {
           >
             <FaDownload /> Download Income Data
           </motion.button>
+            <ExcelUploadIncomeButton />
 
+          </div>
           {/* Filter Section */}
           <motion.div 
             className="bg-gray-800 p-6 rounded-lg shadow-lg w-full mb-8" 
