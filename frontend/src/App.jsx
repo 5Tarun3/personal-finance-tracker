@@ -7,12 +7,12 @@ import BudgetingTools from './pages/BudgetingTools';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import ExpenseManager from './pages/ExpenseManager';
-import IncomeManager from './pages/IncomeManager'; // Import IncomeManager
+import IncomeManager from './pages/IncomeManager'; 
 import NavBar from './pages/NavBar';
 import Footer from './pages/Footer';
 import ProfilePage from './pages/ProfilePage';
 import ChatbotPage from './pages/ChatbotPage';
-
+import DemoVideoPage from './pages/DemoVideoPage'; 
 import Features from './pages/Features';
 import Pricing from './pages/Pricing';
 import Roadmap from './pages/Roadmap';
@@ -43,7 +43,7 @@ function App() {
             <Route path="/IncomeManager" element={<IncomeManager/>} /> 
             <Route path="/Profile" element={<ProfilePage />}/>
             <Route path="/chatbot" element={<ChatbotPage />} />
-
+            <Route path='/demo'element={<DemoVideoPage />} />  
             <Route path="/features" element={<Features />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/roadmap" element={<Roadmap />} />
