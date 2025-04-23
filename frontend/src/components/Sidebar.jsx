@@ -18,7 +18,7 @@ const Sidebar = () => {
     const fetchFinanceOverview = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch('http://localhost:8000/api/expenses/finance-overview', {
+        const response = await fetch(`${API_BASE}/api/expenses/finance-overview`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -27,7 +27,7 @@ const Sidebar = () => {
           throw new Error('Failed to fetch data');
         }
         const expensesData = await response.json();
-        const totalIncomeResponse = await fetch('http://localhost:8000/api/incomes/total', {
+        const totalIncomeResponse = await fetch(`${API_BASE}/api/incomes/total`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -51,7 +51,7 @@ const Sidebar = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://localhost:8000/api/users/monthlyBudget', {
+      const response = await fetch(`${API_BASE}/api/users/monthlyBudget`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const Sidebar = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://localhost:8000/api/users/savingGoal', {
+      const response = await fetch(`${API_BASE}/api/users/savingGoal`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
