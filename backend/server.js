@@ -13,7 +13,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: 'https://finflow-8ybxfzjx7-5tarun3s-projects.vercel.app' }));
 app.use(express.json()); // Middleware for JSON parsing
 
 app.use((req, res, next) => {
