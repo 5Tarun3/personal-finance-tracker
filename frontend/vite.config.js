@@ -6,6 +6,14 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     include: ['sheetjs']
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   }
-});
-
+})

@@ -8,7 +8,7 @@ const DisplayIncomes = ({ onUpdateClick, refetchIncomes, incomes: propIncomes })
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     // If incomes are provided as props, use them directly
     if (propIncomes) {
@@ -26,7 +26,7 @@ const DisplayIncomes = ({ onUpdateClick, refetchIncomes, incomes: propIncomes })
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.get('http://localhost:8000/api/incomes/get', config);
+        const response = await axios.get(`${API_BASE}/api/incomes/get`, config);
         setIncomes(response.data);
       } catch (err) {
         if (err.response && err.response.status === 401) {
@@ -66,7 +66,7 @@ const DisplayIncomes = ({ onUpdateClick, refetchIncomes, incomes: propIncomes })
           Authorization: `Bearer ${token}`,
         },
       };
-      await axios.delete(`http://localhost:8000/api/incomes/delete/${id}`, config);
+      await axios.delete(`${API_BASE}/api/incomes/delete/${id}`, config);
       
       // Update local state if we're managing our own data
       if (!propIncomes) {

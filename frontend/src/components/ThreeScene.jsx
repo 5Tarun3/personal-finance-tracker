@@ -4,7 +4,6 @@ import * as THREE from 'three';
 const ThreeScene = () => {
   const mountRef = useRef(null);
   const rendererRef = useRef(null);
-
   useEffect(() => {
     // Check if mount ref exists
     if (!mountRef.current) return;

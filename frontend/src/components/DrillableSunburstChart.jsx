@@ -10,7 +10,7 @@ const DrillableSunburstChart = () => {
   const [drillStack, setDrillStack] = useState([]);
   const [selectedNode, setSelectedNode] = useState(null);
   const [totalSpending, setTotalSpending] = useState(0);
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const fetchHierarchicalData = async () => {
       try {
@@ -26,7 +26,7 @@ const DrillableSunburstChart = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.get('http://localhost:8000/api/expenses/hierarchical-spending', config);
+        const response = await axios.get(`${API_BASE}/api/expenses/hierarchical-spending`, config);
 
         // Process data to calculate values for parent nodes
         const processData = (node) => {

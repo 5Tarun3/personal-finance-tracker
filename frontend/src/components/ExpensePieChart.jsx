@@ -11,7 +11,7 @@ const FinancePieChart = ({ type = 'expense' }) => {
   const [error, setError] = useState(null);
   const [activeSegment, setActiveSegment] = useState(null);
   const chartRef = useRef(null);
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   // Define colors for chart segments
   const chartColors = [
     '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', 
@@ -47,8 +47,8 @@ const FinancePieChart = ({ type = 'expense' }) => {
       try {
         const token = localStorage.getItem('token');
         const endpoint = type === 'expense' ? 
-          'http://localhost:8000/api/expenses/get' : 
-          'http://localhost:8000/api/incomes/get';
+          `${API_BASE}/api/expenses/get` : 
+          `${API_BASE}/api/incomes/get`;
         
         const response = await fetch(endpoint, {
           headers: {

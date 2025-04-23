@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
@@ -28,7 +28,7 @@ const SignUpForm = () => {
       const { user } = userCredential;
 
       // Register user in the backend
-      await axios.post("http://localhost:8000/api/users/register", { 
+      await axios.post(`${API_BASE}/api/users/register`, { 
         name: user.displayName, 
         email: user.email, 
         password: password,
@@ -50,7 +50,7 @@ const SignUpForm = () => {
       const { displayName, email } = user;
 
       // Register user in the backend
-      await axios.post("http://localhost:8000/api/users/register", { 
+      await axios.post(`${API_BASE}/api/users/register`, { 
         name: displayName, 
         email: email, 
         password: "e23Dk2kd2&i4o5$",

@@ -8,7 +8,7 @@ const ExcelUploadIncomeButton = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState({ total: 0, success: 0, failed: 0 });
   const [showStatus, setShowStatus] = useState(false);
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -66,7 +66,7 @@ const ExcelUploadIncomeButton = () => {
       for (const income of incomes) {
         try {
           const token = localStorage.getItem('token');
-          const response = await fetch('http://localhost:8000/api/incomes/add', {
+          const response = await fetch(`${API_BASE}/api/incomes/add`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

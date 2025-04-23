@@ -10,6 +10,7 @@ const ChatbotPage = () => {
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   // Check if user is logged in
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -32,7 +33,7 @@ const ChatbotPage = () => {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Not authenticated');
       
-      const response = await fetch(`http://localhost:8000/api${endpoint}`, {
+      const response = await fetch(`${API_BASE}/api${endpoint}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

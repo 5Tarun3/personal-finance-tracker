@@ -10,7 +10,7 @@ const UpdateExpense = ({ expense, onClose }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const categories = ["Food", "Entertainment/Luxury", "Travel", "Furniture", "Emergency", "Groceries/Home Supplies", "Education fees", "House Bills", "Services/Hired Help", "Loan payment", "Miscellaneous"];
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const UpdateExpense = ({ expense, onClose }) => {
         },
       };
 
-      await axios.put(`http://localhost:8000/api/expenses/update/${expense._id}`, { category, amount, date }, config);
+      await axios.put(`${API_BASE}/api/expenses/update/${expense._id}`, { category, amount, date }, config);
 
       onClose();
       alert('Expense updated successfully!');

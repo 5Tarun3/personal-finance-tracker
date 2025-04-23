@@ -11,7 +11,7 @@ const SpendingHabitsRadarChart = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const fetchSpendingData = async () => {
     try {
       setLoading(true);
@@ -26,7 +26,7 @@ const SpendingHabitsRadarChart = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get('http://localhost:8000/api/expenses/get', config);
+      const response = await axios.get(`${API_BASE}/api/expenses/get`, config);
       const expenses = response.data;
 
       // Aggregate totals by category

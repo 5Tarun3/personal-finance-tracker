@@ -27,7 +27,7 @@ const CategoryTrendOverTime = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedCategories, setSelectedCategories] = useState(majorCategories.slice(0, 5)); // Start with first 5 categories to avoid clutter
   const [rawData, setRawData] = useState(null); // Store the raw data for reprocessing
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const fetchChartData = async (year) => {
     try {
       setLoading(true);
@@ -43,7 +43,7 @@ const CategoryTrendOverTime = () => {
         },
       };
 
-      const response = await axios.get(`http://localhost:8000/api/expenses/category-trend/${year}`, config);
+      const response = await axios.get(`${API_BASE}/api/expenses/category-trend/${year}`, config);
       const data = response.data;
       console.log("Category trend data received:", data);
       

@@ -13,7 +13,7 @@ const EnhancedLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -41,7 +41,7 @@ const EnhancedLogin = () => {
       const { displayName, email } = result.user;
       
       // Send user data to backend
-      const response = await axios.post("http://localhost:8000/api/users/login", {
+      const response = await axios.post(`${API_BASE}/api/users/login`, {
         email,
         password: "e23Dk2kd2&i4o5$",
         googleLogin: true,

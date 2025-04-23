@@ -4,7 +4,7 @@ import AnimatedButton from '../components/AnimatedButton';
 
 const BudgetForm = ({ onSubmit }) => {
   const [budget, setBudget] = useState('');
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const handleSubmit = (e) => {
     e.preventDefault();
     if (budget > 0) {

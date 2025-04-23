@@ -37,7 +37,7 @@
   }
 
   const generateData = async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MDY0NGMxZThmM2IyYWM4NWFmNzViOCIsImlhdCI6MTc0NTI0MTI5MiwiZXhwIjoxNzQ1MjQ0ODkyfQ.b90HAPQReVZh92tn8JJB28fp95_cDw21LFzwBfc3HUo';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MDY0NTk3ZTZiNDI1OTUyYjA0NzExMCIsImlhdCI6MTc0NTQyNjU4OSwiZXhwIjoxNzQ1NDMwMTg5fQ.TnoSUnPe31j9dScSK7g5S1BgR6n6BAnA5Fh8fsZl6QM';
 
     for (let month = 1; month <= 12; month++) {
       let monthlyExpenses = [];

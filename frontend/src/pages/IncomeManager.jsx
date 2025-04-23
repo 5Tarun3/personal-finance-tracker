@@ -38,7 +38,8 @@ const IncomeManager = () => {
   const [sourceFilter, setSourceFilter] = useState([]);
   const [amountFilter, setAmountFilter] = useState({ active: false, type: '', value1: '', value2: '' });
   const [dateFilter, setDateFilter] = useState({ active: false, type: '', value1: '', value2: '' });
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  // Collapsible sections
   const handleUpdateClick = (income) => {
     setShowUpdateForm(true);
     setIncomeToUpdate(income);
@@ -58,7 +59,7 @@ const IncomeManager = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get('http://localhost:8000/api/incomes/get', config);
+      const response = await axios.get(`${API_BASE}/api/incomes/get`, config);
       return response.data;
     } catch (error) {
       console.error("Error fetching incomes:", error);

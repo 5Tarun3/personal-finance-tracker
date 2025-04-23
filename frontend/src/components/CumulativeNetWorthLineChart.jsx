@@ -11,7 +11,7 @@ const CumulativeNetWorthLineChart = () => {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const fetchChartData = async (year) => {
     try {
       setLoading(true);
@@ -26,7 +26,7 @@ const CumulativeNetWorthLineChart = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get(`http://localhost:8000/api/incomes/monthwise-net/${year}`, config);
+      const response = await axios.get(`${API_BASE}/api/incomes/monthwise-net/${year}`, config);
       const months = response.data.map(item => item.month);
       const netAmounts = response.data.map(item => item.net);
 

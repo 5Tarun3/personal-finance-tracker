@@ -10,7 +10,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const handleRegister = async (e) => {
     e.preventDefault();
     try {

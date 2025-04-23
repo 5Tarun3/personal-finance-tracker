@@ -12,7 +12,7 @@ const ChartVisualization = () => {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const fetchChartData = async (year) => {
     try {
       const token = localStorage.getItem('token');
@@ -25,7 +25,7 @@ const ChartVisualization = () => {
         console.error("No token found in localStorage");
         return;
       }
-      const response = await axios.get(`http://localhost:8000/api/incomes/monthwise-net/${year}`, config);
+      const response = await axios.get(`${API_BASE}/api/incomes/monthwise-net/${year}`, config);
       const months = response.data.map(item => item.month);
       const netAmounts = response.data.map(item => item.net);
       setChartData({

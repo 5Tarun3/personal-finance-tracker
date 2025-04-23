@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [financeOverview, setFinanceOverview] = useState(null);
   const navigate = useNavigate();
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -37,7 +38,7 @@ const Dashboard = () => {
         return;
       }
       
-      const response = await axios.get('http://localhost:8000/api/finance-overview', config);
+      const response = await axios.get(`${API_BASE}/api/finance-overview`, config);
       setFinanceOverview(response.data);
       setData({
         labels: ['Expenses', 'Incomes'],

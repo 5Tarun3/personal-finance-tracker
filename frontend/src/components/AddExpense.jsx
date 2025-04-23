@@ -8,7 +8,7 @@ const AddExpense = ({ refetchExpenses, setRefetchExpenses }) => {
     amount: '',
     date: '',
   });
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const categories = [
     "Food",
     "Entertainment/Luxury",
@@ -52,7 +52,7 @@ const AddExpense = ({ refetchExpenses, setRefetchExpenses }) => {
       },
     };
     try {
-      await axios.post('http://localhost:8000/api/expenses/add', formData, config);
+      await axios.post(`${API_BASE}/api/expenses/add`, formData, config);
       setFormData({
         category: '',
         amount: '',

@@ -5,7 +5,7 @@ import '../styles/LoginPage.css';
 
 const LoginPage = () => {
   const canvasRef = useRef(null);
-  
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');

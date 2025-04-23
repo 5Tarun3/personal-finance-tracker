@@ -50,6 +50,7 @@ const ExpenseManager = () => {
   });
   const navigate = useNavigate();
   // Active filters
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [amountFilter, setAmountFilter] = useState({ active: false, type: '', value1: '', value2: '' });
   const [dateFilter, setDateFilter] = useState({ active: false, type: '', value1: '', value2: '' });
@@ -85,7 +86,7 @@ const ExpenseManager = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get('http://localhost:8000/api/expenses/get', config);
+      const response = await axios.get(`${API_BASE}/api/expenses/get`, config);
       return response.data;
     } catch (error) {
       console.error("Error fetching expenses:", error);

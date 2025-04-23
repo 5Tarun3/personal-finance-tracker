@@ -11,7 +11,7 @@ const IncomeVsExpenseLineChart = () => {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const fetchChartData = async (year) => {
     try {
       setLoading(true);
@@ -28,13 +28,13 @@ const IncomeVsExpenseLineChart = () => {
       };
 
       // Fetch monthly net data (income - expenses)
-      const netResponse = await axios.get(`http://localhost:8000/api/incomes/monthwise-net/${year}`, config);
+      const netResponse = await axios.get(`${API_BASE}/api/incomes/monthwise-net/${year}`, config);
       const months = netResponse.data.map(item => item.month);
 
       // Fetch monthly income totals
-      const incomeResponse = await axios.get(`http://localhost:8000/api/incomes/monthwise-total/${year}`, config).catch(() => null);
+      const incomeResponse = await axios.get(`${API_BASE}/api/incomes/monthwise-total/${year}`, config).catch(() => null);
       // Fetch monthly expense totals
-      const expenseResponse = await axios.get(`http://localhost:8000/api/expenses/monthwise-total/${year}`, config).catch(() => null);
+      const expenseResponse = await axios.get(`${API_BASE}/api/expenses/monthwise-total/${year}`, config).catch(() => null);
 
       // Fallback if monthwise-total endpoints are not implemented, use netResponse data for months and zero arrays
       const incomeTotals = incomeResponse?.data?.map(item => item.total) || new Array(12).fill(0);

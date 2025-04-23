@@ -11,7 +11,7 @@ const UpdateIncome = ({ income, onClose }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const incomeSources = ["bonus","primary salary","investment returns","fixed deposit/interest","rental income","business profit","gift money","royalty income","other"];
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     setSource(income.source);
     setAmount(income.amount);
@@ -49,7 +49,7 @@ const UpdateIncome = ({ income, onClose }) => {
         },
       };
 
-      await axios.put(`http://localhost:8000/api/incomes/update/${income._id}`, { source, amount, date }, config);
+      await axios.put(`${API_BASE}/api/incomes/update/${income._id}`, { source, amount, date }, config);
 
       onClose();
       alert('Income updated successfully!');

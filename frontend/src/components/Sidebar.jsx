@@ -13,7 +13,7 @@ const Sidebar = () => {
   const [savingGoal, setSavingGoal] = useState(0);
   const [showBudgetForm, setShowBudgetForm] = useState(false);
   const [showSavingGoalForm, setShowSavingGoalForm] = useState(false);
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const fetchFinanceOverview = async () => {
       const token = localStorage.getItem('token');

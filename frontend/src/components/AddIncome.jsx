@@ -8,7 +8,7 @@ const AddIncome = ({refetchIncomes, setRefetchIncomes}) => {
     amount: '',
     date: '',
   });
-
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const incomeSources = ["bonus","primary salary","investment returns","fixed deposit/interest","rental income","business profit","gift money","royalty income","other"];
 
   const handleChange = (e) => {
@@ -40,7 +40,7 @@ const AddIncome = ({refetchIncomes, setRefetchIncomes}) => {
       },
     };
     try {
-      await axios.post('http://localhost:8000/api/incomes/add', formData, config);
+      await axios.post(`${API_BASE}/api/incomes/add`, formData, config);
       setFormData({
         source: '',
         amount: '',

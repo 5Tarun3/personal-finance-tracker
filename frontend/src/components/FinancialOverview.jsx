@@ -3,7 +3,6 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'rec
 
 export const FinancialOverview = ({ user }) => {
   const financialData = user.financialData || [];
-
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <h3 className="text-lg font-semibold mb-4">Financial Overview</h3>
