@@ -44,7 +44,7 @@ const ProfilePage = () => {
     navigate('/login');
     window.location.reload();
   };
-
+  
   if (!user) {
     return <div>Loading...</div>;
   }

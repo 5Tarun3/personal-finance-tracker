@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaRobot, FaPaperPlane, FaChartPie, FaWallet, FaDollarSign, FaCalendarAlt } from 'react-icons/fa';
 import '../styles/ChatbotPage.css';
-
+import { useNavigate } from'react-router-dom';
 const ChatbotPage = () => {
   const [messages, setMessages] = useState([
     { sender: 'assistant', text: 'Hello! How can I assist you with your financial summary today?' }
@@ -9,13 +9,19 @@ const ChatbotPage = () => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const navigate = useNavigate();
   // Check if user is logged in
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
   }, []);
-
+  useEffect(() => {
+          const token = localStorage.getItem('token');
+          if (!token) {
+            navigate('/login');
+            window.location.reload();
+          }
+        }, [navigate]);
   // Gemini API URL and key
   const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
   const API_KEY = import.meta.env.VITE_CHAT_API_KEY || import.meta.env.CHAT_API_KEY;
@@ -119,9 +125,9 @@ const ChatbotPage = () => {
         
         Based on this data, provide a detailed and personalized financial analysis or advice.
         Use specific numbers from the data.
-        Format the response in a readable way using bullet points where appropriate.
-        Keep your response under 350 words.
-        
+        Format the response in a readable way using bullet points or indents where appropriate however strictly no emphasis/strong text.
+        Keep your response under 200 words - only provide a short summary.
+        For your information - All financial data is in rupees (INR) as the currency.
         User query: ${userQuery}
       `;
       

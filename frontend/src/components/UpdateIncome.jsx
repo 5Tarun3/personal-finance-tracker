@@ -20,17 +20,26 @@ const UpdateIncome = ({ income, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!source) {
+      alert('Please select a source.');
+      return;
+    }
+
+    if (!amount || amount <= 0) {
+      alert('Amount must be greater than zero.');
+      return;
+    }
+
+    if (!date) {
+      alert('Please select a date.');
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        setShowAlert(true);
-        setErrorMessage('You must be logged in to update income. Please log in or sign up.');
-        return;
-      }
-
-      if (amount <= 0) {
-        setShowAlert(true);
-        setErrorMessage('Amount must be greater than zero.');
+        alert('You must be logged in to update income. Please log in or sign up.');
         return;
       }
 
@@ -43,16 +52,15 @@ const UpdateIncome = ({ income, onClose }) => {
       await axios.put(`http://localhost:8000/api/incomes/update/${income._id}`, { source, amount, date }, config);
 
       onClose();
-      setShowAlert(true);
-      setErrorMessage('Income updated successfully!');
+      alert('Income updated successfully!');
     } catch (error) {
       console.error("Error updating income:", error);
-      setShowAlert(true);
-      setErrorMessage(error.response?.data?.message || 'An unexpected error occurred. Please try again later.');
+      alert(error.response?.data?.message || 'An unexpected error occurred. Please try again later.');
     }
   };
 
   return (
+    <div className="flex justify-center items-center min-h-screen">
     <div className="bg-black p-6 rounded-lg shadow-md">
 
       {showAlert && <NotificationAlert message={errorMessage} onClose={() => setShowAlert(false)} />}
@@ -104,6 +112,7 @@ const UpdateIncome = ({ income, onClose }) => {
           Update Income
         </button>
       </form>
+    </div>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import { FaSearch, FaTimes, FaDownload, FaChartPie, FaChartLine, FaChartBar, FaC
 import axios from 'axios';
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
+import { useNavigate } from'react-router-dom';
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.9 },
@@ -47,7 +48,7 @@ const ExpenseManager = () => {
     sunburst: true,
     radar: true
   });
-  
+  const navigate = useNavigate();
   // Active filters
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [amountFilter, setAmountFilter] = useState({ active: false, type: '', value1: '', value2: '' });
@@ -58,7 +59,13 @@ const ExpenseManager = () => {
     filters: false,
     charts: {}
   });
-
+  useEffect(() => {
+          const token = localStorage.getItem('token');
+          if (!token) {
+            navigate('/login');
+            window.location.reload();
+          }
+        }, [navigate]);
   const handleUpdateClick = (expense) => {
     setShowUpdateForm(true);
     setExpenseToUpdate(expense);
@@ -538,7 +545,7 @@ const ExpenseManager = () => {
       {/* Update Form */}
       {showUpdateForm && expenseToUpdate && (
           <motion.div
-            className="fixed right-0 top-0 w-full md:w-1/3 h-full bg-gray-800 p-6 shadow-lg z-50 overflow-y-auto"
+            className="fixed right-0 w-full md:w-1/3 md:h-1/2 bg-gray-800 p-6 shadow-lg z-20 align-top justify-center min-h-screen"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}

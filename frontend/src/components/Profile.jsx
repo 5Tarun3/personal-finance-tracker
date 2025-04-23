@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import { useNavigate } from "react-router-dom";
 import { auth } from "./firebaseconfig"; // Import auth
@@ -11,7 +11,9 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const Profile = () => {
     // Editable states
-    const [username, setUsername] = useState("Derrick Richard");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [photoURL, setPhotoURL] = useState("");
     const [theme, setTheme] = useState("Light");
     const [notifications, setNotifications] = useState("Enabled");
 
@@ -21,13 +23,20 @@ const Profile = () => {
     const [passwordResetError, setPasswordResetError] = useState('');
 
     const navigate = useNavigate();
-    
+
+    useEffect(() => {
+        const user = auth.currentUser;
+        if (user) {
+            setUsername(user.displayName || "");
+            setEmail(user.email || "");
+            setPhotoURL(user.photoURL || "");
+        }
+    }, []);
+
     const handleLogout = () => {
         signOut(auth).then(() => { // Sign out using Firebase
             localStorage.removeItem('token');
             navigate("/login");
-            window.location.reload(); // Refresh the page after logout
-
             window.location.reload(); // Refresh the page after logout
 
             // Dispatch a custom event to notify NavBar of logout
@@ -121,8 +130,15 @@ const Profile = () => {
                 <div style={{ display: 'flex', gap: '20px', width: '100%' }}>
                     <div style={{ flex: 1, background: '#222', padding: '20px', borderRadius: '10px', boxShadow: '0 0 10px rgba(255, 215, 0, 0.2)' }}>
                         <h2 style={{ color: '#FFD700' }}>User Details</h2>
-                        <p><strong>Username:</strong> <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} style={{ width: '300px' ,background: 'transparent', color: '#FFD700', border: 'none', fontSize: '16px' }} /></p>
-                        <p><strong>Email:</strong> derrickrds@gmail.com</p>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
+                            {photoURL ? (
+                                <img src={photoURL} alt="Profile" style={{ width: '80px', height: '80px', borderRadius: '50%' }} />
+                            ) : (
+                                <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#555' }}></div>
+                            )}
+                            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} style={{ background: 'transparent', color: '#FFD700', border: 'none', fontSize: '16px', flexGrow: 1 }} />
+                        </div>
+                        <p><strong>Email:</strong> {email}</p>
                         <p><strong>Account Created:</strong> January 2025</p>
                         <p>Reset Password:</p>
                         <div>

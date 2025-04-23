@@ -115,7 +115,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <Spline scene="https://prod.spline.design/jNmNZD3Z-2S94Z87/scene.splinecode" />
+      {/* <Spline scene="https://prod.spline.design/jNmNZD3Z-2S94Z87/scene.splinecode" /> */}
       {/* Features Section */}
       <section id="features" className="features-section">
         <div className="section-header">
@@ -189,7 +189,7 @@ const HomePage = () => {
         
         <div className="dashboard-highlights">
           <div className="highlight-item">
-            <span className="highlight-number">350+</span>
+            <span className="highlight-number">20+</span>
             <p>Expense Categories</p>
           </div>
           <div className="highlight-item">
@@ -309,7 +309,7 @@ const HomePage = () => {
           <button className="cta-button" onClick={() => navigate("/signup")}>
             Get Started For Free
           </button>
-          <p className="cta-disclaimer">No credit card required. 14-day free trial.</p>
+          {/* <p className="cta-disclaimer">No credit card required. 14-day free trial.</p> */}
         </div>
       </section>
       

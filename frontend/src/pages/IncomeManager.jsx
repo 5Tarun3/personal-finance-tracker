@@ -8,7 +8,7 @@ import { FaSearch, FaTimes, FaDownload } from 'react-icons/fa';
 import axios from 'axios';
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -33,7 +33,7 @@ const IncomeManager = () => {
   const [refetchIncomes, setRefetchIncomes] = useState(false);
   const [incomes, setIncomes] = useState([]);
   const [filteredIncomes, setFilteredIncomes] = useState([]);
-  
+  const navigate = useNavigate();
   // Active filters
   const [sourceFilter, setSourceFilter] = useState([]);
   const [amountFilter, setAmountFilter] = useState({ active: false, type: '', value1: '', value2: '' });
@@ -173,7 +173,13 @@ const IncomeManager = () => {
     
     setFilteredIncomes(result);
   };
-
+  useEffect(() => {
+          const token = localStorage.getItem('token');
+          if (!token) {
+            navigate('/login');
+            window.location.reload();
+          }
+        }, [navigate]);
   // Fetch incomes when component mounts or refetch is triggered
   useEffect(() => {
     const getIncomes = async () => {
@@ -379,7 +385,7 @@ const IncomeManager = () => {
       {/* Update Form Sidebar */}
       {showUpdateForm && incomeToUpdate && (
         <motion.div
-          className="fixed right-0 top-0 w-full md:w-1/3 h-full bg-gray-800 p-6 shadow-lg z-50"
+          className="fixed right-0 w-full md:w-1/3 md:h-1/2 bg-gray-800 p-6 shadow-lg z-20 align-top justify-center min-h-screen"
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}

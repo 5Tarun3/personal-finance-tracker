@@ -21,17 +21,26 @@ const UpdateExpense = ({ expense, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!category) {
+      alert('Please select a category.');
+      return;
+    }
+
+    if (!amount || amount <= 0) {
+      alert('Amount must be greater than zero.');
+      return;
+    }
+
+    if (!date) {
+      alert('Please select a date.');
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        setShowAlert(true);
-        setErrorMessage('You must be logged in to update expenses. Please log in or sign up.');
-        return;
-      }
-
-      if (amount <= 0) {
-        setShowAlert(true);
-        setErrorMessage('Amount must be greater than zero.');
+        alert('You must be logged in to update expenses. Please log in or sign up.');
         return;
       }
 
@@ -41,71 +50,70 @@ const UpdateExpense = ({ expense, onClose }) => {
         },
       };
 
-      await axios.put(`http://localhost:6000/api/expenses/update/${expense._id}`, { category, amount, date }, config);
+      await axios.put(`http://localhost:8000/api/expenses/update/${expense._id}`, { category, amount, date }, config);
 
       onClose();
-      setShowAlert(true);
-      setErrorMessage('Expense updated successfully!');
+      alert('Expense updated successfully!');
     } catch (error) {
       console.error("Error updating expense:", error);
-      setShowAlert(true);
-      setErrorMessage(error.response?.data?.message || 'An unexpected error occurred. Please try again later.');
+      alert(error.response?.data?.message || 'An unexpected error occurred. Please try again later.');
     }
   };
 
-  return (
-    <div className="bg-black p-6 rounded-lg shadow-md">
+return (
+      <div className="bg-black p-6 rounded-lg shadow-md" >
 
-      {showAlert && <NotificationAlert message={errorMessage} onClose={() => setShowAlert(false)} />}
-      <h1 className='text-gold-300'>Update Expense</h1>
+        {showAlert && <NotificationAlert message={errorMessage} onClose={() => setShowAlert(false)} />}
+        <h1 className='text-gold-300'>Update Expense</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="category" className="block text-gold-300 text-sm font-bold mb-2">Category:</label>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="category" className="block text-gold-300 text-sm font-bold mb-2">Category:</label>
 
-          <select
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required
-            className="w-full bg-gray-700 text-amber-300 border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          >
-            <option value="">Select Category</option>
-            {categories.map((cat, index) => (
-              <option key={index} value={cat}>{cat}</option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-4">
-          <label htmlFor="amount" className="block text-gold-300 text-sm font-bold mb-2">Amount:</label>
+            <select
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+              className="w-full bg-gray-700 text-amber-300 border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="">Select Category</option>
+              {categories.map((cat, index) => (
+                <option key={index} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="amount" className="block text-gold-300 text-sm font-bold mb-2">Amount:</label>
 
-          <input
-            type="number"
-            id="amount"
-            value={amount}
-            onChange={(e) => setAmount(parseFloat(e.target.value))}
-            required
-            className="w-full bg-gray-700 text-amber-300 border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="date" className="block text-gold-300 text-sm font-bold mb-2">Date:</label>
+            <input
+              type="number"
+              id="amount"
+              value={amount}
+              onChange={(e) => setAmount(parseFloat(e.target.value))}
+              required
+              className="w-full bg-gray-700 text-amber-300 border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="date" className="block text-gold-300 text-sm font-bold mb-2">Date:</label>
 
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-            className="w-full bg-gray-700 text-amber-300 border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-        </div>
-          <button type="submit" className="bg-purple-600 hover:bg-purple-700 text-gold-300 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <input
+              type="date"
+              id="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+              className="w-full bg-gray-700 text-amber-300 border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+            <button type="submit" className="bg-purple-600 hover:bg-purple-700 text-gold-300 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
 
-          Update Expense
-        </button>
-      </form>
-    </div>
+            Update Expense
+          </button>
+        </form>
+      </div>
+  
   );
 };
 

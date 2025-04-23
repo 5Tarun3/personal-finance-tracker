@@ -29,6 +29,22 @@ const AddExpense = ({ refetchExpenses, setRefetchExpenses }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.category) {
+      alert('Please select a category.');
+      return;
+    }
+
+    if (!formData.amount || parseFloat(formData.amount) <= 0) {
+      alert('Amount must be greater than zero.');
+      return;
+    }
+
+    if (!formData.date) {
+      alert('Please select a date.');
+      return;
+    }
+
     const token = localStorage.getItem('token');
     const config = {
       headers: {
