@@ -13,7 +13,20 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors({ origin: 'https://finflow-sigma.vercel.app/' }));
+
+const allowedOrigins = ['https://finflow-sigma.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true // if you're sending cookies
+}));
+
 app.use(express.json()); // Middleware for JSON parsing
 
 app.use((req, res, next) => {
