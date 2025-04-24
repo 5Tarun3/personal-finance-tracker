@@ -7,6 +7,7 @@ import axios from "axios"; // Import axios for making API requests
 import "../styles/Auth.css"; // We'll create a new CSS file for all auth components
 
 const SignUpForm = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -72,6 +73,15 @@ const SignUpForm = () => {
       {error && <div className="error-message">{error}</div>}
       
       <form onSubmit={handleRegister} className="auth-form">
+        <div className="input-group">
+          <input 
+            type="text" 
+            placeholder="Name" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            required 
+          />
+        </div>
         <div className="input-group">
           <input 
             type="email" 
