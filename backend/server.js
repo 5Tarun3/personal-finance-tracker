@@ -8,7 +8,9 @@ const expenseRoutes = require('./routes/expenseRoutes');
 const incomeRoutes = require('./routes/incomeRoutes');
 const financeOverviewRoutes = require('./routes/financeOverviewRoutes'); // Import the new route
 
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 connectDB();
 
