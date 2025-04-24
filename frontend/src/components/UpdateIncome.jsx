@@ -60,7 +60,7 @@ const UpdateIncome = ({ income, onClose }) => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex min-h-screen">
     <div className="bg-black p-6 rounded-lg shadow-md">
 
       {showAlert && <NotificationAlert message={errorMessage} onClose={() => setShowAlert(false)} />}
