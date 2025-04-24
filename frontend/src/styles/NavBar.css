@@ -36,13 +36,13 @@
 }
 
 .brand-name {
-  font-size: 4.5rem;
+  font-size: 3.5rem;
   font-weight: 700;
   background: linear-gradient(90deg, #4CD964 0%, #5E5CE6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-top: 15%;
+  margin: 0;
 }
 
 .brand-container {
