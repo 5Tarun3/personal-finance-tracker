@@ -70,12 +70,7 @@ const UpdateIncome = ({ income, onClose }) => {
   return (
     <div>
       {showAlert && <NotificationAlert message={errorMessage} onClose={() => setShowAlert(false)} />}
-      
-      <div className="flex items-center mb-4">
-        <button onClick={onClose} className="flex items-center text-white hover:text-gray-300">
-          ← Back to Incomes
-        </button>
-      </div>
+
       
       <div className="bg-gray-900 p-6 rounded-lg shadow-md">
         <h2 className="text-amber-500 text-xl font-bold mb-4">Update Income</h2>
