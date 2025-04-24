@@ -109,7 +109,7 @@ const DrillableSunburstChart = () => {
 
             return `<strong>${name}</strong><br>
           ${path ? `<span style="font-size: 0.85em; color: #ccc;">Path: ${path} > ${name}</span><br>` : ''}
-          $${value.toFixed(2)}<br>
+          ₹${value.toFixed(2)}<br>
           ${percentage}% of parent`;
           })
           .onClick((node) => {

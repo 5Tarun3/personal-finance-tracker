@@ -111,7 +111,7 @@ const SpendingHabitsRadarChart = () => {
           label: function (context) {
             const label = context.label || '';
             const value = context.raw || 0;
-            return `${label}: ${(value * 100).toFixed(1)}% of max spending`;
+            return `${label}: ₹ ${(value * 100).toFixed(1)}% of max spending`;
           },
         },
       },
