@@ -30,7 +30,7 @@ const SignUpForm = () => {
 
       // Register user in the backend
       await axios.post(`${API_BASE}/api/users/register`, { 
-        name: user.displayName, 
+        name: name, 
         email: user.email, 
         password: password,
         passwordCheck: password,
